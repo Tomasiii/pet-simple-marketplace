@@ -1,10 +1,10 @@
 import {lazy} from "react";
 import { Route } from 'react-router-dom';
 import './app.scss';
-import 'normalize.css';
+import '../../../node_modules/normalize.css/normalize.css';
 
-const Home = lazy(() => import("./pages/Home/Home"));
-const Header = lazy(() => import("./components/Header/Header"));
+const Home = lazy(() => import("../../pages/Home/Home"));
+const Header = lazy(() => import("../Header/Header"));
 
 function App() {
   return (
