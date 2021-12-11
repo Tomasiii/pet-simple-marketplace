@@ -1,6 +1,6 @@
 const base = 'https://yalantis-react-school-api.yalantis.com/api/v1/'
 
-const api_consts = {
+const PATH_MAKER = {
     'BASE': {
         '_':base,
         'PRODUCTS':{
@@ -9,4 +9,4 @@ const api_consts = {
         }
     }
 };
-export default api_consts;
+export  {PATH_MAKER};

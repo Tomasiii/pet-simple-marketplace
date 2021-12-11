@@ -1,5 +1,4 @@
 import React from 'react'
-
 const ProductsStateContext = React.createContext()
 const ProductsDispatchContext = React.createContext()
 
@@ -18,8 +17,8 @@ function productsReducer(state, action) {
     }
 }
 
-function ProductsProvider({children}) {
-    const [state, dispatch] = React.useReducer(productsReducer, {count: 0})
+async function ProductsProvider({children}) {
+    const [state, dispatch] = React.useReducer(productsReducer, {items: []})
     return (
         <ProductsStateContext.Provider value={state}>
             <ProductsDispatchContext.Provider value={dispatch}>
