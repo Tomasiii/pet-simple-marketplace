@@ -20,8 +20,12 @@ function productsReducer(state, action) {
 
 function ProductsProvider({children}) {
     const [state, dispatch] = React.useReducer(productsReducer, {count: 0})
-    return (<ProductsStateContext.Provider value={state}> <ProductsDispatchContext.Provider
-        value={dispatch}> {children} </ProductsDispatchContext.Provider> </ProductsStateContext.Provider>)
+    return (
+        <ProductsStateContext.Provider value={state}>
+            <ProductsDispatchContext.Provider value={dispatch}>
+                {children}
+            </ProductsDispatchContext.Provider>
+        </ProductsStateContext.Provider>)
 }
 
 function useProductsState() {

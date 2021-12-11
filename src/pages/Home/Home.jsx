@@ -4,8 +4,8 @@ import {useProductsState, useProductsDispatch} from '../../context/context.js'
 
 function Home(){
 
-    useEffect(() => {
-//асинхронный запрос
+    useEffect(async () => {
+        const allProducts = await fetch()
     }, []);
 
     console.log()
