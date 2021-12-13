@@ -8,13 +8,13 @@ const Header = lazy(() => import("../Header/Header"));
 
 function App() {
   return (
-      <>
+      <div className='wrapper'>
           <Header />
           <div className="content">
               <Route path="/" component={Home} exact />
               {/*<Route path="/cart" component={Cart} exact />*/}
           </div>
-      </>
+      </div>
   );
 }
 

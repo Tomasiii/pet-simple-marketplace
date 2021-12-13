@@ -1,0 +1,14 @@
+.home{
+	padding-top: 40px;
+	margin: 0 auto;
+	&__title{
+		margin: 0;
+		padding-bottom: 50px;
+		font-size: 35px;
+	}
+	&__wrapper{
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 300px));
+		gap:35px;
+	}
+}

@@ -1,35 +1,42 @@
 import {useEffect} from "react";
 import {useProductsState, useProductsDispatch} from '../../context/context.js'
-import {PATH_MAKER} from "../../constants/api";
-
-// import {setAllProducrs} from "../../api/apiRequests";
-
+import {setAllProducrs} from "../../api/apiRequests";
+import Card from "../../components/Card/Card";
+import style from './home.module.scss';
+import LoadingBlock from "../../components/Card/LoadingBlock";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 function Home() {
+    let {items, process} = useProductsState();
     const dispatch = useProductsDispatch();
 
     useEffect(() => {
-        const setAllProducrs = async () => {
-            let response = await fetch(PATH_MAKER.BASE.PRODUCTS._);
+        setAllProducrs(dispatch);
+    }, [dispatch]);
 
-            if (response.ok) {
-                let allProducts = await response.json();
-                dispatch({'type': 'ADD_ALL_PRODUCTS', 'payload': allProducts})
-            } else {
-                throw new Error("Ошибка HTTP: " + response.status);
-            }
+    const setContent = (process) => {
+        switch (process) {
+            case 'loading':
+                const fackeArr = [...Array(20).keys()];
+                return fackeArr.map(item => <LoadingBlock key={item}/>)
+            case 'confirmed':
+                return items.map(item => <Card key={item.id} {...item}/>)
+            case 'error':
+                return <ErrorMessage/>
         }
-        setAllProducrs();
-    }, [PATH_MAKER.BASE.PRODUCTS._]);
+    }
+    let content = setContent(process, items);
 
     return (
-        <section className="home">
-            <div className="container">
-                <div className="home__wrapper">
-
+        <ErrorBoundary>
+            <section className={style.home}>
+                <h2 className={style.home__title}>All products</h2>
+                <div className={style.home__wrapper}>
+                    {content}
                 </div>
-            </div>
-        </section>
+            </section>
+        </ErrorBoundary>
     )
 }
 

@@ -5,7 +5,7 @@ import logoSvg from '../../assets/img/olx-logo.png';
 
 function Header() {
     return (
-        <section className="header">
+        <header className="header">
             <div className="container">
                 <div className="header__wrapper">
                     <Link to="/">
@@ -22,7 +22,7 @@ function Header() {
                 </div>
 
             </div>
-        </section>
+        </header>
     );
 }
 

@@ -4,11 +4,14 @@ const ProductsDispatchContext = React.createContext()
 
 function productsReducer(state, action) {
     switch (action.type) {
-        case 'ADD_ALL_PRODUCTS': {
-            return {items: action.payload}
+        case 'ADD_ALL_PRODUCTS': {   // set - items && perPage && totalItems && perPage
+            return {...action.payload}
         }
         case 'ADD_PRODUCT_TO_CART': {
             return {...state, cart: [...state.cart, action.payload]}
+        }
+        case 'SET_PROCESS':{
+            return {...state, process:action.payload}
         }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
@@ -17,8 +20,8 @@ function productsReducer(state, action) {
     }
 }
 
-async function ProductsProvider({children}) {
-    const [state, dispatch] = React.useReducer(productsReducer, {items: []})
+function ProductsProvider({children}) {
+    const [state, dispatch] = React.useReducer(productsReducer, {items:[], process:'loading'})
     return (
         <ProductsStateContext.Provider value={state}>
             <ProductsDispatchContext.Provider value={dispatch}>
