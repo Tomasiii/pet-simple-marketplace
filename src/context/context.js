@@ -1,49 +1,58 @@
-import React from 'react'
-const ProductsStateContext = React.createContext()
-const ProductsDispatchContext = React.createContext()
+import React from "react";
+
+const ProductsStateContext = React.createContext();
+const ProductsDispatchContext = React.createContext();
 
 function productsReducer(state, action) {
     switch (action.type) {
-        case 'ADD_ALL_PRODUCTS': {   // set - items && perPage && totalItems && perPage
-            return {...action.payload}
+        case "ADD_ALL_PRODUCTS": {
+            // set - items && perPage && totalItems && perPage
+            return { ...state, ...action.payload };
         }
-        case 'ADD_PRODUCT_TO_CART': {
-            return {...state, cart: [...state.cart, action.payload]}
+        case "ADD_PRODUCT_TO_CART": {
+            return { ...state, cart: [...state.cart, action.payload] };
         }
-        case 'SET_PROCESS':{
-            return {...state, process:action.payload}
+        case "SET_PROCESS": {
+            return { ...state, process: action.payload };
         }
         default: {
-            throw new Error(`Unhandled action type: ${action.type}`)
+            throw new Error(`Unhandled action type: ${action.type}`);
             // return state ???
         }
     }
 }
 
-function ProductsProvider({children}) {
-    const [state, dispatch] = React.useReducer(productsReducer, {items:[], process:'loading'})
+const ProductsProvider = function ({ children }) {
+    const [state, dispatch] = React.useReducer(productsReducer, {
+        items: [],
+        process: "pending",
+        cart: []
+    });
     return (
         <ProductsStateContext.Provider value={state}>
             <ProductsDispatchContext.Provider value={dispatch}>
                 {children}
             </ProductsDispatchContext.Provider>
-        </ProductsStateContext.Provider>)
-}
+        </ProductsStateContext.Provider>
+    );
+};
 
 function useProductsState() {
-    const context = React.useContext(ProductsStateContext)
+    const context = React.useContext(ProductsStateContext);
     if (context === undefined) {
-        throw new Error('useProductsState must be used within a ProductsProvider')
+        throw new Error("useProductsState must be used within a ProductsProvider");
     }
-    return context
+    return context;
 }
 
 function useProductsDispatch() {
-    const context = React.useContext(ProductsDispatchContext)
+    const context = React.useContext(ProductsDispatchContext);
     if (context === undefined) {
-        throw new Error('useProductsDispatch must be used within a ProductsProvider')
+        throw new Error(
+            "useProductsDispatch must be used within a ProductsProvider"
+        );
     }
-    return context
+    return context;
 }
 
-export {ProductsProvider, useProductsState, useProductsDispatch}
+export { ProductsProvider, useProductsState, useProductsDispatch };

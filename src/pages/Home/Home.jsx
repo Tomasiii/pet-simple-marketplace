@@ -1,43 +1,35 @@
-import {useEffect} from "react";
-import {useProductsState, useProductsDispatch} from '../../context/context.js'
-import {setAllProducrs} from "../../api/apiRequests";
+import { useProductsState } from "../../context/context";
 import Card from "../../components/Card/Card";
-import style from './home.module.scss';
+import style from "./home.module.scss";
 import LoadingBlock from "../../components/Card/LoadingBlock";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
+import Spinner from "../../components/Spinner/Spinner";
 
-function Home() {
-    let {items, process} = useProductsState();
-    const dispatch = useProductsDispatch();
+const Home = () => {
+    const { items, process } = useProductsState();
 
-    useEffect(() => {
-        setAllProducrs(dispatch);
-    }, [dispatch]);
+    const setContent = () => {
+        const fackeArr = [...Array(20).keys()];
 
-    const setContent = (process) => {
         switch (process) {
-            case 'loading':
-                const fackeArr = [...Array(20).keys()];
-                return fackeArr.map(item => <LoadingBlock key={item}/>)
-            case 'confirmed':
-                return items.map(item => <Card key={item.id} {...item}/>)
-            case 'error':
-                return <ErrorMessage/>
+            case "loading":
+                return fackeArr.map((item) => <LoadingBlock key={item} />);
+            case "confirmed":
+                return items.map((item) => <Card key={item.id} {...item} />);
+            case "error":
+                return <ErrorMessage />;
+            default:
+                return <Spinner />;
         }
-    }
-    let content = setContent(process, items);
+    };
+    const content = setContent(process, items);
 
     return (
-        <ErrorBoundary>
-            <section className={style.home}>
-                <h2 className={style.home__title}>All products</h2>
-                <div className={style.home__wrapper}>
-                    {content}
-                </div>
-            </section>
-        </ErrorBoundary>
-    )
-}
+        <section className={style.home}>
+            <h2 className={style.home__title}>Все товары</h2>
+            <div className={style.home__wrapper}>{content}</div>
+        </section>
+    );
+};
 
 export default Home;

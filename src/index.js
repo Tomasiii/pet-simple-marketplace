@@ -1,19 +1,14 @@
-import React, {lazy, Suspense} from 'react';
-import ReactDOM from 'react-dom';
-import {BrowserRouter as Router} from 'react-router-dom';
-import {ProductsProvider} from "./context/context";
-import Spinner from "./components/Spinner/Spinner";
+import React from "react";
+import { render } from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ProductsProvider } from "./context/context";
+import App from "./components/App/App";
 
-const App = lazy(() => import('./components/App/App'));
-
-ReactDOM.render(
+render(
     <Router>
         <ProductsProvider>
-            <Suspense fallback={<Spinner/>}>
-                <App/>
-            </Suspense>
+            <App />
         </ProductsProvider>
     </Router>,
-    document.getElementById('root')
+    document.getElementById("root")
 );
-

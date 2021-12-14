@@ -7,7 +7,7 @@
 
 	&:hover {
 		box-shadow: 0 20px 35px rgba(0, 0, 0, 0.06);
-		transform: translateY(-5px);
+		transform: translateY(-1px);
 	}
 
 	&__img{
@@ -40,4 +40,14 @@
 			}
 		}
 	}
+    &__buy{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &__button{
+            cursor:pointer;
+            padding: 5px;
+            border-radius: 10px;
+        }
+    }
 }

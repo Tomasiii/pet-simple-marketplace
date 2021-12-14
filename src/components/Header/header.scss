@@ -5,4 +5,25 @@
 		display: flex;
 		justify-content: space-between;
 	}
+	&__cart{
+		text-decoration: none;
+		&__item{
+			display: flex;
+			align-items: center;
+			font-size: 32px;
+			color: #232323;
+			text-decoration: none;
+			.cart__svg {
+				position: relative;
+				top: -2px;
+				width: 30px;
+				height: 30px;
+				margin-right: 10px;
+				path {
+					stroke: #232323;
+					stroke-width: 1.9;
+				}
+			}
+		}
+	}
 }
