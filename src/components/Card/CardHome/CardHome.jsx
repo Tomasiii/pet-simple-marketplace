@@ -1,5 +1,6 @@
 import style from "./cardHome.module.scss";
 import { useProductsDispatch } from "../../../context/context";
+import { Link } from "react-router-dom";
 
 const CardHome = function (item) {
     const { name, price, origin } = item;
@@ -9,19 +10,21 @@ const CardHome = function (item) {
 
     return (
         <div className={style.card}>
-            <img
-                className={style.card__img}
-                src="https://wheatskw.com/web/image/product.template/47/image_256"
-                alt="goods"
-            />
-            <p className={style.card__title}>
-                {name}
-                <br />
-                <span>
-                    Made in
-                    {origin}
-                </span>
-            </p>
+            <Link to={`product/${item.id}`}>
+                <img
+                    className={style.card__img}
+                    src="https://wheatskw.com/web/image/product.template/47/image_256"
+                    alt="goods"
+                />
+                <p className={style.card__title}>
+                    {name}
+                    <br />
+                    <span>
+                        Made in
+                        {origin}
+                    </span>
+                </p>
+            </Link>
             <div className={style.card__price}>
                 <div className={style.card__buy}>
                     <div>

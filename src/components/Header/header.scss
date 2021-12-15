@@ -15,9 +15,13 @@
             margin: 0;
 			color: #232323;
 			text-decoration: none;
+            .cart__rel{
+                position: relative;
+            }
 			.cart__svg {
 				position: relative;
-				top: -2px;
+                right:5px ;
+				top: 0;
 				width: 30px;
 				height: 30px;
 				margin-right: 10px;
@@ -25,7 +29,24 @@
 					stroke: #232323;
 					stroke-width: 1.9;
 				}
+                &__notification{
+                    position: absolute;
+                    animation: notification 1.5s ease-in-out 2;
+                    top:-2px;
+                    right: 8px;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background: #fe5f1e;
+                }
 			}
 		}
 	}
 }
+
+@keyframes notification {
+    from { transform: scale(1)}
+    50%{transform: scale(2) }
+    to { transform: scale(1) }
+}
+

@@ -22,7 +22,7 @@ const Header = function () {
                         </div>
                     </Link>
 
-                    {(pathname !== '/cart') &&
+                    {pathname !== "/cart" && (
                         <Link to="/cart">
                             <div className="header__cart">
                                 <h2 className="header__cart__item">
@@ -31,7 +31,7 @@ const Header = function () {
                                 </h2>
                             </div>
                         </Link>
-                    }
+                    )}
                 </div>
             </div>
         </header>

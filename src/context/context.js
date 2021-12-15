@@ -44,7 +44,10 @@ function productsReducer(state, action) {
                 break;
             }
             case "CLEANING_CART_ITEM": {
-                draft.totalPrice -= draft.cart[__payload.id].reduce((sum, item) => sum + item.price, 0);
+                draft.totalPrice -= draft.cart[__payload.id].reduce(
+                    (sum, item) => sum + item.price,
+                    0
+                );
                 draft.totalCount -= draft.cart[__payload.id].length;
                 delete draft.cart[__payload.id];
                 break;

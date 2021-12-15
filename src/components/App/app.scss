@@ -11,7 +11,10 @@ body {
 	font-family: 'Inter', system-ui;
 }
 
-a { text-decoration: none; }
+a {
+    text-decoration: none;
+    color: black;
+}
 
 .wrapper {
 	background: #ffffff;

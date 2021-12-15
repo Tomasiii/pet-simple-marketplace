@@ -1,6 +1,7 @@
 import style from "./cardCart.module.scss";
 import { useProductsDispatch } from "../../../context/context";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CardCart = function (props) {
     const { item, curCardCount } = props;
@@ -8,23 +9,27 @@ const CardCart = function (props) {
     const dispatch = useProductsDispatch();
 
     const addToCart = () => dispatch({ type: "ADD_PRODUCT_TO_CART", payload: item });
-    const removeFromCart = () => dispatch({ type: "REMOVE_PRODUCT_FORM_CART", payload: item });
-    const cleaningCartItem = () => dispatch({type:"CLEANING_CART_ITEM", payload: item})
+    const removeFromCart = () =>
+        dispatch({ type: "REMOVE_PRODUCT_FORM_CART", payload: item });
+    const cleaningCartItem = () =>
+        dispatch({ type: "CLEANING_CART_ITEM", payload: item });
 
     return (
         <div className={style.card}>
-            <div className={style.card__product}>
-                <img
-                    className={style.card__img}
-                    src="https://wheatskw.com/web/image/product.template/47/image_256"
-                    alt="goods"
-                />
-                <p className={style.card__title}>
-                    {name}
-                    <br />
-                    <span>Made in {origin}</span>
-                </p>
-            </div>
+            <Link to={`product/${item.id}`}>
+                <div className={style.card__product}>
+                    <img
+                        className={style.card__img}
+                        src="https://wheatskw.com/web/image/product.template/47/image_256"
+                        alt="goods"
+                    />
+                    <p className={style.card__title}>
+                        {name}
+                        <br />
+                        <span>Made in {origin}</span>
+                    </p>
+                </div>
+            </Link>
 
             <div className={style.card__count}>
                 <i

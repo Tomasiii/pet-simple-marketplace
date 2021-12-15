@@ -17,24 +17,6 @@ const Cart = function () {
         }
     };
 
-    // const onRemoveItem = (id) => {
-    //     if (window.confirm('Вы действительно хотите удалить?')) {
-    //         dispatch(removeCartItem(id));
-    //     }
-    // };
-    //
-    // const onPlusItem = (id) => {
-    //     dispatch(plusCartItem(id));
-    // };
-    //
-    // const onMinusItem = (id) => {
-    //     dispatch(minusCartItem(id));
-    // };
-    //
-    const onClickOrder = () => {
-        console.log("ВАШ ЗАКАЗ - "); //         console.log('ВАШ ЗАКАЗ', items);
-    };
-
     return (
         <div className="container container--cart">
             {totalCount ? (
@@ -74,7 +56,7 @@ const Cart = function () {
                             >
                                 <span>Вернуться назад</span>
                             </Link>
-                            <button onClick={onClickOrder} className="pay-btn">
+                            <button className="pay-btn">
                                 <span>Оплатить сейчас</span>
                             </button>
                         </div>
