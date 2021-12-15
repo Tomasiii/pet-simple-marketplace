@@ -1,10 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
 import logoSvg from "../../assets/img/olx-logo.png";
 import CartSvg from "../../assets/svg/CartSvg";
 
 const Header = function () {
+    let { pathname } = useLocation();
+
     return (
         <header className="header">
             <div className="container">
@@ -20,14 +22,16 @@ const Header = function () {
                         </div>
                     </Link>
 
-                    <div className="header__cart">
+                    {(pathname !== '/cart') &&
                         <Link to="/cart">
-                            <h2 className="header__cart__item">
-                                <CartSvg />
-                                Корзина
-                            </h2>
+                            <div className="header__cart">
+                                <h2 className="header__cart__item">
+                                    <CartSvg />
+                                    Корзина
+                                </h2>
+                            </div>
                         </Link>
-                    </div>
+                    }
                 </div>
             </div>
         </header>

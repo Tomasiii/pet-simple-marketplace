@@ -1,7 +1,7 @@
 import { useProductsState } from "../../context/context";
-import Card from "../../components/Card/Card";
+import CardHome from "../../components/Card/CardHome/CardHome";
 import style from "./home.module.scss";
-import LoadingBlock from "../../components/Card/LoadingBlock";
+import LoadingBlock from "../../components/Card/CardHome/LoadingBlock";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 
@@ -15,7 +15,7 @@ const Home = () => {
             case "loading":
                 return fackeArr.map((item) => <LoadingBlock key={item} />);
             case "confirmed":
-                return items.map((item) => <Card key={item.id} {...item} />);
+                return items.map((item) => <CardHome key={item.id} {...item} />);
             case "error":
                 return <ErrorMessage />;
             default:

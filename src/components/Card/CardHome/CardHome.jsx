@@ -1,13 +1,12 @@
-import style from "./card.module.scss";
-import { useProductsDispatch } from "../../context/context";
+import style from "./cardHome.module.scss";
+import { useProductsDispatch } from "../../../context/context";
 
-const Card = function (item) {
+const CardHome = function (item) {
     const { name, price, origin } = item;
     const dispatch = useProductsDispatch();
 
-    const addToCart = () => {
-        return dispatch({ type: "ADD_PRODUCT_TO_CART", payload: item });
-    };
+    const addToCart = () => dispatch({ type: "ADD_PRODUCT_TO_CART", payload: item });
+
     return (
         <div className={style.card}>
             <img
@@ -28,9 +27,7 @@ const Card = function (item) {
                     <div>
                         Price:
                         <br />
-                        <span>
-                            {price} <span>usd</span>
-                        </span>
+                        <span>{price} $</span>
                     </div>
                     <div>
                         <button
@@ -46,4 +43,4 @@ const Card = function (item) {
     );
 };
 
-export default Card;
+export default CardHome;

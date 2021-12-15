@@ -22,8 +22,8 @@ const App = () => {
         <div className="wrapper">
             <Header />
             <main>
-                <div className="content">
-                    <Switch>
+                <div>
+                    <Switch componentClass="div">
                         <Route path="/" component={Home} exact />
                         <Route path="/cart" component={Cart} exact />
                         <Redirect to="/" />
