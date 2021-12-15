@@ -38,7 +38,7 @@ function productsReducer(state, action) {
                 break;
             }
             case "CLEANING_CART": {
-                draft.cart = [];
+                draft.cart = {};
                 draft.totalPrice = 0;
                 draft.totalCount = 0;
                 break;
