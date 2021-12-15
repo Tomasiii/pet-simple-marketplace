@@ -4,9 +4,10 @@ import style from "./home.module.scss";
 import LoadingBlock from "../../components/Card/CardHome/LoadingBlock";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
+import { memo } from "react";
 
 const Home = () => {
-    const { items, process } = useProductsState();
+    const { process, items } = useProductsState();
 
     const setContent = () => {
         const fackeArr = [...Array(20).keys()];
@@ -32,4 +33,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default memo(Home);

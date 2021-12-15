@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import "./app.scss";
 import { setAllProducrs } from "../../api/apiRequests";
@@ -12,7 +12,6 @@ import Spinner from "../Spinner/Spinner";
 const App = () => {
     const dispatch = useProductsDispatch();
     const { process } = useProductsState();
-
     useEffect(() => {
         setAllProducrs(dispatch);
     }, [dispatch]);
@@ -38,4 +37,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default memo(App);

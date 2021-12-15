@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
 import logoSvg from "../../assets/img/olx-logo.png";
@@ -38,4 +38,4 @@ const Header = function () {
     );
 };
 
-export default Header;
+export default memo(Header);

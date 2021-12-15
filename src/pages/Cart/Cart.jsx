@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import cartEmptyImage from "../../assets/img/empty-cart.png";
 import "./cart.scss";
@@ -82,4 +82,4 @@ const Cart = function () {
     );
 };
 
-export default Cart;
+export default memo(Cart);

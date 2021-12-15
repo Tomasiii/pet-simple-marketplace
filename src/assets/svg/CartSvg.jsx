@@ -1,11 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import { useProductsState } from "../../context/context";
 
-
 const CartSvg = function () {
-    const {cart} = useProductsState();
+    const { cart } = useProductsState();
     const isRed = Object.values(cart).length;
-    const svgNotification = (isRed ? "cart__svg__notification" : '');
+    const svgNotification = isRed ? "cart__svg__notification" : "";
     return (
         <div className="cart__rel">
             <svg
@@ -40,8 +39,7 @@ const CartSvg = function () {
             </svg>
             <div className={svgNotification}></div>
         </div>
-
     );
 };
 
-export default CartSvg;
+export default memo(CartSvg);

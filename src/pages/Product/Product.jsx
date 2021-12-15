@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useProductsDispatch, useProductsState } from "../../context/context";
 import style from "./product.module.scss";
+import { memo } from "react";
 
 function Product() {
     const { items } = useProductsState();
@@ -21,18 +22,32 @@ function Product() {
             </div>
 
             <div className={style.product__info}>
-                <p className={style.product__text}> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis enim eveniet repudiandae ullam voluptatibus! Eos incidunt, magnam minima omnis perferendis ratione sed totam velit! Atque autem consectetur magnam quod.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis enim eveniet repudiandae ullam voluptatibus! Eos incidunt, magnam minima omnis perferendis ratione sed totam velit! Atque autem consectetur magnam quod. Adipisci cum expedita facilis laudantium nulla placeat quasi quisquam sapiente vitae!</p>
+                <p className={style.product__text}>
+                    {" "}
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
+                    enim eveniet repudiandae ullam voluptatibus! Eos incidunt, magnam
+                    minima omnis perferendis ratione sed totam velit! Atque autem
+                    consectetur magnam quod.Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Debitis enim eveniet repudiandae ullam
+                    voluptatibus! Eos incidunt, magnam minima omnis perferendis
+                    ratione sed totam velit! Atque autem consectetur magnam quod.
+                    Adipisci cum expedita facilis laudantium nulla placeat quasi
+                    quisquam sapiente vitae!
+                </p>
                 <p className={style.product__origin}>Made in {item?.origin}</p>
                 <div className={style.product__buy}>
                     <div>
                         Price: <span>{item?.price} $</span>
                     </div>
                     <div>
-                        <button className={style.product__buy__button} onClick={addToCart}>
-                            <Link to="/cart">
+                        <Link to="/cart">
+                            <button
+                                className={style.product__buy__button}
+                                onClick={addToCart}
+                            >
                                 Купить
-                            </Link>
-                        </button>
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -40,4 +55,4 @@ function Product() {
     );
 }
 
-export default Product;
+export default memo(Product);

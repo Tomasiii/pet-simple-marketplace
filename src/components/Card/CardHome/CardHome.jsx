@@ -1,6 +1,7 @@
 import style from "./cardHome.module.scss";
 import { useProductsDispatch } from "../../../context/context";
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
 const CardHome = function (item) {
     const { name, price, origin } = item;
@@ -46,4 +47,4 @@ const CardHome = function (item) {
     );
 };
 
-export default CardHome;
+export default memo(CardHome);

@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const CartBucketSvg = function () {
     return (
         <svg
@@ -39,4 +41,4 @@ const CartBucketSvg = function () {
     );
 };
 
-export default CartBucketSvg;
+export default memo(CartBucketSvg);

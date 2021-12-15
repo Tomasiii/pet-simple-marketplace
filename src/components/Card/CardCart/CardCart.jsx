@@ -1,6 +1,6 @@
 import style from "./cardCart.module.scss";
 import { useProductsDispatch } from "../../../context/context";
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 
 const CardCart = function (props) {
@@ -62,4 +62,4 @@ const CardCart = function (props) {
     );
 };
 
-export default CardCart;
+export default memo(CardCart);
