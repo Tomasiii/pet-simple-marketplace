@@ -6,6 +6,7 @@ import LoadingBlock from "../../components/Card/CardHome/LoadingBlock";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
+import Pagination from "../../components/Pagination/Pagination";
 
 const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -20,7 +21,7 @@ const Home = () => {
             case "loading":
                 return fackeArr.map((item) => <LoadingBlock key={item} />);
             case "confirmed":
-                return items.map((item) => <CardHome key={item.id} {...item} />);
+                return <Pagination className={style.home__wrapper} key={'Pagination'} items={items} ViewComponent={CardHome} />
             case "error":
                 return <ErrorMessage />;
             default:
@@ -33,7 +34,7 @@ const Home = () => {
         <ErrorBoundary>
             <section className={style.home}>
                 <h2 className={style.home__title}>Все товары</h2>
-                <div className={style.home__wrapper}>{content}</div>
+                <div>{content}</div>
             </section>
         </ErrorBoundary>
     );
