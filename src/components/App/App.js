@@ -1,7 +1,7 @@
 import { memo, useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import "./app.scss";
-import { setAllProducrs } from "../../api/apiRequests";
+import { setAllProducts } from "../../api/apiRequests";
 import { useProductsDispatch, useProductsState } from "../../context/context";
 import Home from "../../pages/Home/Home";
 import Cart from "../../pages/Cart/Cart";
@@ -13,7 +13,7 @@ const App = () => {
     const dispatch = useProductsDispatch();
     const { process } = useProductsState();
     useEffect(() => {
-        setAllProducrs(dispatch);
+        setAllProducts(dispatch);
     }, [dispatch]);
 
     if (process === "pending") return <Spinner />;

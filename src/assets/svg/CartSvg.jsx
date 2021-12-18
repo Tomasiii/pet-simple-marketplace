@@ -1,8 +1,7 @@
 import React, { memo } from "react";
 import { useProductsState } from "../../context/context";
 
-const CartSvg = function () {
-    const { cart } = useProductsState();
+const CartSvg = function ({ cart = {} }) {
     const isRed = Object.values(cart).length;
     const svgNotification = isRed ? "cart__svg__notification" : "";
     return (

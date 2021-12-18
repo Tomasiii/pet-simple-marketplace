@@ -9,10 +9,7 @@ import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import Pagination from "../../components/Pagination/Pagination";
 
 const Home = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemPerPage] = useState(10);
     const { process, items } = useProductsState();
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     const setContent = () => {
         const fackeArr = [...Array(20).keys()];
@@ -21,7 +18,14 @@ const Home = () => {
             case "loading":
                 return fackeArr.map((item) => <LoadingBlock key={item} />);
             case "confirmed":
-                return <Pagination className={style.home__wrapper} key={'Pagination'} items={items} ViewComponent={CardHome} />
+                return (
+                    <Pagination
+                        className={style.home__wrapper}
+                        key={"Pagination"}
+                        items={items}
+                        ViewComponent={CardHome}
+                    />
+                );
             case "error":
                 return <ErrorMessage />;
             default:

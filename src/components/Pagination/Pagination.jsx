@@ -19,7 +19,7 @@ const Pagination = ({ items, ViewComponent, limitOnPage = 20 }) => {
             <div className={stl.paginator__buttons}>
                 <button
                     disabled={curPage === 1}
-                    onClick={() => setCurPage(curPage - 1)}
+                    onClick={() => setCurPage((prev) => prev - 1)}
                     className={stl.paginator__buttons__arrow}
                 >
                     <i className={`fas fa-arrow-circle-left fa-2x`} />
@@ -39,7 +39,7 @@ const Pagination = ({ items, ViewComponent, limitOnPage = 20 }) => {
                 ))}
                 <button
                     disabled={curPage === buttonsCount}
-                    onClick={() => setCurPage(curPage + 1)}
+                    onClick={() => setCurPage((prev) => prev + 1)}
                     className={stl.paginator__buttons__arrow}
                 >
                     <i className="fas fa-arrow-circle-right fa-2x" />

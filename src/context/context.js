@@ -5,7 +5,6 @@ const ProductsStateContext = React.createContext();
 const ProductsDispatchContext = React.createContext();
 
 function productsReducer(state, action) {
-    //state = { cart: {'234k2l':[items]} , * , * }
     const __type = action.type;
     const __payload = action.payload ?? null;
 
@@ -53,8 +52,7 @@ function productsReducer(state, action) {
                 break;
             }
             default: {
-                throw new Error(`Unhandled action type: ${action.type}`);
-                // return state ???
+                return state;
             }
         }
     });

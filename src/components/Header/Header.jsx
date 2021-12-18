@@ -3,9 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
 import logoSvg from "../../assets/img/olx-logo.png";
 import CartSvg from "../../assets/svg/CartSvg";
+import wallet from "../../assets/img/wallet.png";
+import { useProductsState } from "../../context/context";
 
 const Header = function () {
     let { pathname } = useLocation();
+    const { cart, totalPrice } = useProductsState();
 
     return (
         <header className="header">
@@ -26,9 +29,19 @@ const Header = function () {
                         <Link to="/cart">
                             <div className="header__cart">
                                 <h2 className="header__cart__item">
-                                    <CartSvg />
+                                    <CartSvg cart={cart} />
                                     Корзина
                                 </h2>
+                                <div className="header__cart__counter">
+                                    <img
+                                        src={wallet}
+                                        alt="1"
+                                        style={{ height: "50px" }}
+                                    />
+                                    <span className="header__black">
+                                        {totalPrice}
+                                    </span>
+                                </div>
                             </div>
                         </Link>
                     )}

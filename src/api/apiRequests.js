@@ -1,17 +1,21 @@
-import { PATH_MAKER } from "../constants/api";
+import axios from "axios";
+const instance = axios.create({
+    baseURL: "https://yalantis-react-school-api.yalantis.com/api/v1/"
+});
 
-async function setAllProducrs(dispatch) {
+async function setAllProducts(dispatch) {
     dispatch({ type: "SET_PROCESS", payload: "loading" });
-    const response = await fetch(PATH_MAKER.BASE.PRODUCTS._);
 
-    if (response.ok) {
-        const allProducts = await response.json();
-        dispatch({ type: "ADD_ALL_PRODUCTS", payload: allProducts });
-        dispatch({ type: "SET_PROCESS", payload: "confirmed" });
-    } else {
-        dispatch({ type: "SET_PROCESS", payload: "error" });
-        // throw new Error("Ошибка HTTP: " + response.status);
-    }
+    instance
+        .get("products/")
+        .then((response) => {
+            dispatch({ type: "ADD_ALL_PRODUCTS", payload: response.data });
+            dispatch({ type: "SET_PROCESS", payload: "confirmed" });
+        })
+        .catch((error) => {
+            dispatch({ type: "SET_PROCESS", payload: "error" });
+            console.log("Error:", error);
+        });
 }
 
-export { setAllProducrs };
+export { setAllProducts };
