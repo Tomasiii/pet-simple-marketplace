@@ -1,5 +1,6 @@
 import React from "react";
 import produce from "immer";
+import types from "../constants/dispatchTypes";
 
 const ProductsStateContext = React.createContext();
 const ProductsDispatchContext = React.createContext();
@@ -10,14 +11,14 @@ function productsReducer(state, action) {
 
     return produce(state, (draft) => {
         switch (__type) {
-            case "SET_PROCESS": {
+            case types.SET_PROCESS: {
                 draft.process = __payload;
                 break;
             }
-            case "ADD_ALL_PRODUCTS": {
+            case types.ADD_ALL_PRODUCTS: {
                 return { ...draft, ...__payload };
             }
-            case "ADD_PRODUCT_TO_CART": {
+            case types.ADD_PRODUCT_TO_CART: {
                 draft.cart[__payload.id]
                     ? draft.cart[__payload.id].push(__payload)
                     : (draft.cart[__payload.id] = [__payload]);
@@ -26,7 +27,7 @@ function productsReducer(state, action) {
                 draft.totalPrice += __payload.price;
                 break;
             }
-            case "REMOVE_PRODUCT_FORM_CART": {
+            case types.REMOVE_PRODUCT_FORM_CART: {
                 if (draft.cart[__payload.id].length === 1) {
                     delete draft.cart[__payload.id];
                 } else {
@@ -36,13 +37,13 @@ function productsReducer(state, action) {
                 draft.totalPrice -= __payload.price;
                 break;
             }
-            case "CLEANING_CART": {
+            case types.CLEANING_CART: {
                 draft.cart = {};
                 draft.totalPrice = 0;
                 draft.totalCount = 0;
                 break;
             }
-            case "CLEANING_CART_ITEM": {
+            case types.CLEANING_CART_ITEM: {
                 draft.totalPrice -= draft.cart[__payload.id].reduce(
                     (sum, item) => sum + item.price,
                     0

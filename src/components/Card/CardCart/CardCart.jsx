@@ -2,17 +2,19 @@ import style from "./cardCart.module.scss";
 import { useProductsDispatch } from "../../../context/context";
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
+import types from "../../../constants/dispatchTypes";
 
 const CardCart = function (props) {
     const { item, curCardCount } = props;
     const { name, price, origin } = item;
     const dispatch = useProductsDispatch();
 
-    const addToCart = () => dispatch({ type: "ADD_PRODUCT_TO_CART", payload: item });
+    const addToCart = () =>
+        dispatch({ type: types.ADD_PRODUCT_TO_CART, payload: item });
     const removeFromCart = () =>
-        dispatch({ type: "REMOVE_PRODUCT_FORM_CART", payload: item });
+        dispatch({ type: types.REMOVE_PRODUCT_FORM_CART, payload: item });
     const cleaningCartItem = () =>
-        dispatch({ type: "CLEANING_CART_ITEM", payload: item });
+        dispatch({ type: types.CLEANING_CART_ITEM, payload: item });
 
     return (
         <div className={style.card}>

@@ -1,5 +1,5 @@
-import { memo, useState } from "react";
-import { useProductsState } from "../../context/context";
+import { memo, useEffect, useState } from "react";
+import { useProductsDispatch, useProductsState } from "../../context/context";
 import CardHome from "../../components/Card/CardHome/CardHome";
 import style from "./home.module.scss";
 import LoadingBlock from "../../components/Card/CardHome/LoadingBlock";
@@ -7,6 +7,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import Pagination from "../../components/Pagination/Pagination";
+import { setAllProducts } from "../../api/apiRequests";
 
 const Home = () => {
     const { process, items } = useProductsState();

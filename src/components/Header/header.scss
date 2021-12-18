@@ -15,6 +15,7 @@
 			align-items: center;
 			font-size: 32px;
             margin: 0;
+            padding-left: 10px;
 			color: #232323;
 			text-decoration: none;
             .cart__rel{
@@ -22,7 +23,7 @@
             }
 			.cart__svg {
 				position: relative;
-                right:5px ;
+                right:5px;
 				top: 0;
 				width: 30px;
 				height: 30px;
@@ -45,7 +46,7 @@
 		}
         &__counter{
             display: flex;
-            justify-content: center;
+            justify-content: start;
             align-items: center;
             font-size: 18px;
             margin-top:5px;

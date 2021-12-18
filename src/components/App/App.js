@@ -1,17 +1,18 @@
 import { memo, useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import "./app.scss";
-import { setAllProducts } from "../../api/apiRequests";
 import { useProductsDispatch, useProductsState } from "../../context/context";
 import Home from "../../pages/Home/Home";
 import Cart from "../../pages/Cart/Cart";
 import Product from "../../pages/Product/Product";
 import Header from "../Header/Header";
 import Spinner from "../Spinner/Spinner";
+import { setAllProducts } from "../../api/apiRequests";
 
 const App = () => {
-    const dispatch = useProductsDispatch();
     const { process } = useProductsState();
+    const dispatch = useProductsDispatch();
+
     useEffect(() => {
         setAllProducts(dispatch);
     }, [dispatch]);
