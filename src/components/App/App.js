@@ -1,5 +1,5 @@
 import { memo, useEffect } from "react";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
 import "./app.scss";
 import { useProductsDispatch, useProductsState } from "../../context/context";
 import Header from "../Header/Header";

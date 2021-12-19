@@ -1,5 +1,5 @@
-import { memo, useEffect, useState } from "react";
-import { useProductsDispatch, useProductsState } from "../../context/context";
+import { memo } from "react";
+import { useProductsState } from "../../context/context";
 import CardHome from "../../components/Card/CardHome/CardHome";
 import style from "./home.module.scss";
 import LoadingBlock from "../../components/Card/CardHome/LoadingBlock";
@@ -12,11 +12,11 @@ const Home = () => {
     const { process, items } = useProductsState();
 
     const setContent = () => {
-        const fackeArr = [...Array(20).keys()];
+        const fakeArr = [...Array(20).keys()];
 
         switch (process) {
             case "loading":
-                return fackeArr.map((item) => <LoadingBlock key={item} />);
+                return fakeArr.map((item) => <LoadingBlock key={item} />);
             case "confirmed":
                 return (
                     <Pagination
