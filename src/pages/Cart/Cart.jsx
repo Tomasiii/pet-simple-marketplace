@@ -7,6 +7,7 @@ import CartBucketSvg from "../../assets/svg/CartBucketSvg";
 import { useProductsDispatch, useProductsState } from "../../context/context";
 import CardCart from "../../components/Card/CardCart/CardCart";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
+import ROUT from "../../constants/routes";
 
 const Cart = function () {
     const dispatch = useProductsDispatch();
@@ -75,7 +76,7 @@ const Cart = function () {
                             Для того, чтобы заказать, перейди на главную страницу.
                         </p>
                         <img src={cartEmptyImage} alt="Empty cart" />
-                        <Link to="/" className="button button--black">
+                        <Link to={ROUT.getInitial} className="button button--black">
                             <span>Вернуться назад</span>
                         </Link>
                     </div>

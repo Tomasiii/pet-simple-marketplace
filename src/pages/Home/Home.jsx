@@ -7,7 +7,6 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import Pagination from "../../components/Pagination/Pagination";
-import { setAllProducts } from "../../api/apiRequests";
 
 const Home = () => {
     const { process, items } = useProductsState();

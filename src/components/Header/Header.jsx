@@ -5,6 +5,7 @@ import logoSvg from "../../assets/img/olx-logo.png";
 import CartSvg from "../../assets/svg/CartSvg";
 import wallet from "../../assets/img/wallet.png";
 import { useProductsState } from "../../context/context";
+import ROUT from "../../constants/routes";
 
 const Header = function () {
     let { pathname } = useLocation();
@@ -14,30 +15,21 @@ const Header = function () {
         <header className="header">
             <div className="container">
                 <div className="header__wrapper">
-                    <Link to="/">
+                    <Link to={ROUT.getInitial}>
                         <div className="header__logo">
-                            <img
-                                width="121"
-                                height="70"
-                                src={logoSvg}
-                                alt="OLX logo"
-                            />
+                            <img src={logoSvg} alt="OLX logo" />
                         </div>
                     </Link>
 
-                    {pathname !== "/cart" && (
-                        <Link to="/cart">
+                    {pathname !== ROUT.getCart && (
+                        <Link to={ROUT.getCart}>
                             <div className="header__cart">
                                 <h2 className="header__cart__item">
                                     <CartSvg cart={cart} />
                                     Корзина
                                 </h2>
                                 <div className="header__cart__counter">
-                                    <img
-                                        src={wallet}
-                                        alt="1"
-                                        style={{ height: "50px" }}
-                                    />
+                                    <img src={wallet} alt="1" />
                                     <span className="header__black">
                                         {totalPrice}
                                     </span>

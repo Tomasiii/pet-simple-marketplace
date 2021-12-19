@@ -3,6 +3,8 @@ import { useProductsDispatch, useProductsState } from "../../context/context";
 import style from "./product.module.scss";
 import { memo } from "react";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
+import ROUT from "../../constants/routes";
+import types from "../../constants/dispatchTypes";
 
 function Product() {
     const { items } = useProductsState();
@@ -10,7 +12,8 @@ function Product() {
     const { id } = useParams();
 
     const item = items.filter((item) => item.id === id)[0];
-    const addToCart = () => dispatch({ type: "ADD_PRODUCT_TO_CART", payload: item });
+    const addToCart = () =>
+        dispatch({ type: types.ADD_PRODUCT_TO_CART, payload: item });
 
     return (
         <ErrorBoundary>
@@ -42,7 +45,7 @@ function Product() {
                             Price: <span>{item?.price} $</span>
                         </div>
                         <div>
-                            <Link to="/cart">
+                            <Link to={ROUT.getCart}>
                                 <button
                                     className={style.product__buy__button}
                                     onClick={addToCart}

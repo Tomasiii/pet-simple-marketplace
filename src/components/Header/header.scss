@@ -6,6 +6,12 @@
 		justify-content: space-between;
         align-items: center;
 	}
+    &__logo{
+        img{
+            width:121px;
+            height:70px;
+        }
+    }
 	&__cart{
 		text-decoration: none;
         text-align: center;
@@ -50,6 +56,9 @@
             align-items: center;
             font-size: 18px;
             margin-top:5px;
+        img{
+            height: 50px;
+        }
         }
 	}
     &__black{

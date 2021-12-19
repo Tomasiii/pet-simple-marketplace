@@ -3,6 +3,7 @@ import { useProductsDispatch } from "../../../context/context";
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import types from "../../../constants/dispatchTypes";
+import ROUT from "../../../constants/routes";
 
 const CardCart = function (props) {
     const { item, curCardCount } = props;
@@ -18,7 +19,7 @@ const CardCart = function (props) {
 
     return (
         <div className={style.card}>
-            <Link to={`product/${item.id}`}>
+            <Link to={`${ROUT.getProduct}${item.id}`}>
                 <div className={style.card__product}>
                     <img
                         className={style.card__img}
@@ -58,7 +59,7 @@ const CardCart = function (props) {
             </div>
 
             <div className={style.card__delete} onClick={cleaningCartItem}>
-                <i className="far fa-times-circle" style={{ fontSize: "37px" }}></i>
+                <i className="far fa-times-circle"></i>
             </div>
         </div>
     );
