@@ -8,6 +8,8 @@ import Product from "../../pages/Product/Product";
 import Header from "../Header/Header";
 import Spinner from "../Spinner/Spinner";
 import { setAllProducts } from "../../api/apiRequests";
+import productsURL from "../../constants/url";
+import { routes } from "../../routes";
 
 const App = () => {
     const { process } = useProductsState();
@@ -25,10 +27,8 @@ const App = () => {
                 <Header />
                 <main>
                     <div>
-                        <Switch componentClass="div">
-                            <Route path="/" component={Home} exact />
-                            <Route path="/cart" component={Cart} exact />
-                            <Route path="/product/:id" component={Product} exact />
+                        <Switch>
+                            {routes}
                             <Redirect to="/" />
                         </Switch>
                     </div>

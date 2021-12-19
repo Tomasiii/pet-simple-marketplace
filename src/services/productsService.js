@@ -1,12 +1,12 @@
 import axios from "axios";
-import productsURL from "../constants/url.js";
+import URL from "../constants/url.js";
 
 export const axiosInstance = axios.create({
-    baseURL: "https://yalantis-react-school-api.yalantis.com/api/v1/"
+    baseURL: URL.baseURL
 });
 
 const productsService = {
-    getProducts: () => axiosInstance.get(productsURL.getProducts)
+    getProducts: () => axiosInstance.get(URL.getProducts)
 };
 
 export const { getProducts } = productsService;
