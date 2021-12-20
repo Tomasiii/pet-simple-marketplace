@@ -1,0 +1,32 @@
+.product{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 5% 0 5%;
+    margin: 0 auto;
+    font-size: 22px;
+    &__promo{
+        text-align: center;
+        max-width:30%;
+    }
+    &__info{
+        max-width:40%;
+    }
+    &__text{
+        font-size: 18px;
+    }
+    &__origin{
+        margin-top: 20px;
+    }
+    &__buy{
+        margin-top: 15px;
+        span{
+            font-weight: 600;
+        }
+        &__button{
+            width: 200px;
+            height: 55px;
+            margin-top: 20px;
+        }
+    }
+}
