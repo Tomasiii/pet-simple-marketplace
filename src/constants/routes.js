@@ -1,8 +1,8 @@
-const ROUT = {
-    getInitial: "/",
-    getProduct: "/product/",
-    getProductId: "/product/:id",
-    getCart: "/cart"
+const ROUTE_PATHS = {
+    HOME: "/",
+    PRODUCTS: "/products/",
+    PRODUCT_DETAILS: "/products/:id",
+    CART: "/cart"
 };
 
-export default ROUT;
+export default ROUTE_PATHS;

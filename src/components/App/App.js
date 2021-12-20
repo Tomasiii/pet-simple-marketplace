@@ -1,4 +1,4 @@
-import { memo, useEffect } from "react";
+import { cloneElement, memo, useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
 import "./app.scss";
 import { useProductsDispatch, useProductsState } from "../../context/context";
@@ -6,7 +6,7 @@ import Header from "../Header/Header";
 import Spinner from "../Spinner/Spinner";
 import { setAllProducts } from "../../api/apiRequests";
 import { routes } from "../../routes";
-import ROUT from "../../constants/routes";
+import ROUTE_PATHS from "../../constants/routes";
 
 const App = () => {
     const { process } = useProductsState();
@@ -26,7 +26,7 @@ const App = () => {
                     <div>
                         <Switch>
                             {routes}
-                            <Redirect to={ROUT.getInitial} />
+                            <Redirect to={ROUTE_PATHS.HOME} />
                         </Switch>
                     </div>
                 </main>

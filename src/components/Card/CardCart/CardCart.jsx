@@ -3,7 +3,7 @@ import { useProductsDispatch } from "../../../context/context";
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import types from "../../../constants/dispatchTypes";
-import ROUT from "../../../constants/routes";
+import ROUTE_PATHS from "../../../constants/routes";
 
 const CardCart = function (props) {
     const { item, curCardCount } = props;
@@ -19,7 +19,7 @@ const CardCart = function (props) {
 
     return (
         <div className={style.card}>
-            <Link to={`${ROUT.getProduct}${item.id}`}>
+            <Link to={`${ROUTE_PATHS.PRODUCTS}${item.id}`}>
                 <div className={style.card__product}>
                     <img
                         className={style.card__img}

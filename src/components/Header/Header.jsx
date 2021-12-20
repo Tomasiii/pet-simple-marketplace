@@ -5,7 +5,7 @@ import logoSvg from "../../assets/img/olx-logo.png";
 import CartSvg from "../../assets/svg/CartSvg";
 import wallet from "../../assets/img/wallet.png";
 import { useProductsState } from "../../context/context";
-import ROUT from "../../constants/routes";
+import ROUTE_PATHS from "../../constants/routes";
 
 const Header = function () {
     let { pathname } = useLocation();
@@ -15,14 +15,14 @@ const Header = function () {
         <header className="header">
             <div className="container">
                 <div className="header__wrapper">
-                    <Link to={ROUT.getInitial}>
+                    <Link to={ROUTE_PATHS.HOME}>
                         <div className="header__logo">
                             <img src={logoSvg} alt="OLX logo" />
                         </div>
                     </Link>
 
-                    {pathname !== ROUT.getCart && (
-                        <Link to={ROUT.getCart}>
+                    {pathname !== ROUTE_PATHS.CART && (
+                        <Link to={ROUTE_PATHS.CART}>
                             <div className="header__cart">
                                 <h2 className="header__cart__item">
                                     <CartSvg cart={cart} />

@@ -3,7 +3,7 @@ import { useProductsDispatch } from "../../../context/context";
 import { Link } from "react-router-dom";
 import { memo } from "react";
 import types from "../../../constants/dispatchTypes";
-import ROUT from "../../../constants/routes";
+import ROUTE_PATHS from "../../../constants/routes";
 
 const CardHome = function (item) {
     const { name, price, origin } = item;
@@ -14,7 +14,7 @@ const CardHome = function (item) {
 
     return (
         <div className={style.card}>
-            <Link to={`${ROUT.getProduct}${item.id}`}>
+            <Link to={`${ROUTE_PATHS.PRODUCTS}${item.id}`}>
                 <img
                     className={style.card__img}
                     src="https://wheatskw.com/web/image/product.template/47/image_256"

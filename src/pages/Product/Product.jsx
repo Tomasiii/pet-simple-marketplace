@@ -3,7 +3,7 @@ import { useProductsDispatch, useProductsState } from "../../context/context";
 import style from "./product.module.scss";
 import { memo } from "react";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
-import ROUT from "../../constants/routes";
+import ROUTE_PATHS from "../../constants/routes";
 import types from "../../constants/dispatchTypes";
 
 function Product() {
@@ -45,7 +45,7 @@ function Product() {
                             Price: <span>{item?.price} $</span>
                         </div>
                         <div>
-                            <Link to={ROUT.getCart}>
+                            <Link to={ROUTE_PATHS.CART}>
                                 <button
                                     className={style.product__buy__button}
                                     onClick={addToCart}
