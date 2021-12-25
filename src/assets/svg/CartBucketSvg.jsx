@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-const CartBucketSvg = function () {
+const CartBucketSvg = () => {
     return (
         <svg
             width="20"

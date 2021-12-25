@@ -1,21 +1,23 @@
 import style from "./cardCart.module.scss";
-import { useProductsDispatch } from "../../../context/context";
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
-import types from "../../../constants/dispatchTypes";
 import ROUTE_PATHS from "../../../constants/routes";
+import { useDispatch } from "react-redux";
+import {
+    addProductToCart,
+    cleaningCartItem,
+    removeProductFromCart
+} from "../../../store/slices";
 
-const CardCart = function (props) {
+const CardCart = (props) => {
+    console.log(props);
     const { item, curCardCount } = props;
     const { name, price, origin } = item;
-    const dispatch = useProductsDispatch();
+    const dispatch = useDispatch();
 
-    const addToCart = () =>
-        dispatch({ type: types.ADD_PRODUCT_TO_CART, payload: item });
-    const removeFromCart = () =>
-        dispatch({ type: types.REMOVE_PRODUCT_FORM_CART, payload: item });
-    const cleaningCartItem = () =>
-        dispatch({ type: types.CLEANING_CART_ITEM, payload: item });
+    const addToCart = () => dispatch(addProductToCart(item));
+    const removeFromCart = () => dispatch(removeProductFromCart(item));
+    const removeItemGroup = () => dispatch(cleaningCartItem(item));
 
     return (
         <div className={style.card}>
@@ -58,8 +60,8 @@ const CardCart = function (props) {
                 </div>
             </div>
 
-            <div className={style.card__delete} onClick={cleaningCartItem}>
-                <i className="far fa-times-circle"></i>
+            <div className={style.card__delete} onClick={removeItemGroup}>
+                <i className="far fa-times-circle" />
             </div>
         </div>
     );

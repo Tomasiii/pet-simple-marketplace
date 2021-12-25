@@ -2,7 +2,7 @@ import { memo, useState } from "react";
 import style from "../../pages/Home/home.module.scss";
 import stl from "./paginator.module.scss";
 
-const Pagination = ({ items, ViewComponent, limitOnPage = 20 }) => {
+const Pagination = ({ items: { items }, ViewComponent, limitOnPage = 20 }) => {
     const [curPage, setCurPage] = useState(1);
     const startItems = curPage * limitOnPage - limitOnPage;
     const elementsForView = items.slice(startItems, startItems + limitOnPage);
@@ -15,7 +15,6 @@ const Pagination = ({ items, ViewComponent, limitOnPage = 20 }) => {
                     <ViewComponent key={item.id} {...item} />
                 ))}
             </div>
-
             <div className={stl.paginator__buttons}>
                 <button
                     disabled={curPage === 1}

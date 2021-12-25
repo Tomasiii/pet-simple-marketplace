@@ -4,18 +4,19 @@ import cartEmptyImage from "../../assets/img/empty-cart.png";
 import "./cart.scss";
 import CartSvg from "../../assets/svg/CartSvg";
 import CartBucketSvg from "../../assets/svg/CartBucketSvg";
-import { useProductsDispatch, useProductsState } from "../../context/context";
 import CardCart from "../../components/Card/CardCart/CardCart";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import ROUTE_PATHS from "../../constants/routes";
+import { useDispatch, useSelector } from "react-redux";
+import { cleaningCart } from "../../store/slices";
+import productsSelector from "../../store/selectors/productsSelector";
 
-const Cart = function () {
-    const dispatch = useProductsDispatch();
-    const { cart, totalPrice, totalCount } = useProductsState();
-
+const Cart = () => {
+    const dispatch = useDispatch();
+    const { cart, totalCount, totalPrice } = useSelector(productsSelector);
     const onClearCart = () => {
         if (window.confirm("Вы действительно хотите очистить корзину?")) {
-            dispatch({ type: "CLEANING_CART" });
+            dispatch(cleaningCart());
         }
     };
 

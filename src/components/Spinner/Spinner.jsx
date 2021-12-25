@@ -1,7 +1,7 @@
 import React from "react";
 import "./spinner.css";
 
-const Spinner = function () {
+const Spinner = () => {
     return (
         <div className="lds-ring">
             <div />

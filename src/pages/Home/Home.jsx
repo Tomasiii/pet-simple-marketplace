@@ -1,5 +1,4 @@
 import { memo } from "react";
-import { useProductsState } from "../../context/context";
 import CardHome from "../../components/Card/CardHome/CardHome";
 import style from "./home.module.scss";
 import LoadingBlock from "../../components/Card/CardHome/LoadingBlock";
@@ -7,17 +6,19 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import Pagination from "../../components/Pagination/Pagination";
+import { useSelector } from "react-redux";
+import productsSelector from "../../store/selectors/productsSelector";
 
 const Home = () => {
-    const { process, items } = useProductsState();
+    const { process, items } = useSelector(productsSelector);
 
     const setContent = () => {
         const fakeArr = [...Array(20).keys()];
 
         switch (process) {
-            case "loading":
+            case "waiting":
                 return fakeArr.map((item) => <LoadingBlock key={item} />);
-            case "confirmed":
+            case "idle":
                 return (
                     <Pagination
                         className={style.home__wrapper}
@@ -25,6 +26,7 @@ const Home = () => {
                         items={items}
                         ViewComponent={CardHome}
                     />
+                    // <div>working</div>
                 );
             case "error":
                 return <ErrorMessage />;

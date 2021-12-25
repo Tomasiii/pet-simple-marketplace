@@ -1,6 +1,6 @@
 import img from "./error.gif";
 
-const ErrorMessage = function () {
+const ErrorMessage = () => {
     return (
         <div style={{ textAlign: "center" }}>
             <img

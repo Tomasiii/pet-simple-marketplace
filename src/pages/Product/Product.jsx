@@ -1,19 +1,21 @@
 import { Link, useParams } from "react-router-dom";
-import { useProductsDispatch, useProductsState } from "../../context/context";
 import style from "./product.module.scss";
 import { memo } from "react";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import ROUTE_PATHS from "../../constants/routes";
-import types from "../../constants/dispatchTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { addProductToCart } from "../../store/slices";
+import productsSelector from "../../store/selectors/productsSelector";
 
-function Product() {
-    const { items } = useProductsState();
-    const dispatch = useProductsDispatch();
+const Product = () => {
+    const {
+        items: { items: productsItems }
+    } = useSelector(productsSelector);
+    const dispatch = useDispatch();
     const { id } = useParams();
 
-    const item = items.filter((item) => item.id === id)[0];
-    const addToCart = () =>
-        dispatch({ type: types.ADD_PRODUCT_TO_CART, payload: item });
+    const [item] = productsItems.filter((item) => item.id === id);
+    const addToCart = () => dispatch(addProductToCart(item));
 
     return (
         <ErrorBoundary>
@@ -59,6 +61,6 @@ function Product() {
             </div>
         </ErrorBoundary>
     );
-}
+};
 
 export default memo(Product);
