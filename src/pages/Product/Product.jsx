@@ -8,9 +8,8 @@ import { addProductToCart } from "../../store/slices";
 import productsSelector from "../../store/selectors/productsSelector";
 
 const Product = () => {
-    const {
-        items: { items: productsItems }
-    } = useSelector(productsSelector);
+    const { items: productsItems } = useSelector(productsSelector);
+
     const dispatch = useDispatch();
     const { id } = useParams();
 

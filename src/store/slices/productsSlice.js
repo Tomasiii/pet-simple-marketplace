@@ -13,15 +13,6 @@ const productsSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
-        productsProcess: (state, action) => {
-            state.process = action.payload;
-        },
-        productsAddAll: (state, action) => {
-            state.items = action.payload.items;
-            state.page = action.payload.page;
-            state.perPage = action.payload.perPage;
-            state.totalItems = action.payload.totalItems;
-        },
         addProductToCart: (state, action) => {
             const __payload = action.payload ?? null;
 
@@ -65,7 +56,10 @@ const productsSlice = createSlice({
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.process = "idle";
-                state.items = action.payload;
+                state.items = action.payload.items;
+                state.page = action.payload.page;
+                state.perPage = action.payload.perPage;
+                state.totalItems = action.payload.totalItems;
             })
             .addCase(fetchProducts.rejected, (state) => {
                 state.process = "error";
@@ -78,8 +72,6 @@ const { actions, reducer } = productsSlice;
 
 export default reducer;
 export const {
-    productsProcess,
-    productsAddAll,
     addProductToCart,
     removeProductFromCart,
     cleaningCart,
