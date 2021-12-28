@@ -3,12 +3,12 @@ import style from "./product.module.scss";
 import { memo } from "react";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import ROUTE_PATHS from "../../constants/routes";
-import { addProductToCart } from "../../store/slices";
-import productsSelector from "../../store/selectors/productsSelector";
+import { addProductToCart, selectAll } from "../../store/slices";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 
 const Product = () => {
-    const { items: productsItems } = useAppSelector(productsSelector);
+    const productsItems = useAppSelector(selectAll);
+
     const dispatch = useAppDispatch();
     const { id } = useParams<{ id: string }>();
 

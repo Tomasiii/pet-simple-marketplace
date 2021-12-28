@@ -6,11 +6,11 @@ import Spinner from "../Spinner/Spinner";
 import { routes } from "../../routes";
 import ROUTE_PATHS from "../../constants/routes";
 import fetchProducts from "../../store/thunks/getProducts";
-import productsSelector from "../../store/selectors/productsSelector";
+import { processSelector } from "../../store/selectors/productsSelector";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 
 const App: FC = () => {
-    const { process } = useAppSelector(productsSelector);
+    const process = useAppSelector(processSelector);
     const dispatch = useAppDispatch();
 
     useEffect(() => {

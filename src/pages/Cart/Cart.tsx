@@ -8,8 +8,8 @@ import CardCart from "../../components/Card/CardCart/CardCart";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import ROUTE_PATHS from "../../constants/routes";
 import { cleaningCart } from "../../store/slices";
-import productsSelector from "../../store/selectors/productsSelector";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
+import { productsSelector } from "../../store/selectors";
 
 const Cart = () => {
     const dispatch = useAppDispatch();

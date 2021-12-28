@@ -5,12 +5,13 @@ import logoSvg from "../../assets/img/olx-logo.png";
 import CartSvg from "../../assets/svg/CartSvg";
 import wallet from "../../assets/img/wallet.png";
 import ROUTE_PATHS from "../../constants/routes";
-import productsSelector from "../../store/selectors/productsSelector";
 import { useAppSelector } from "../../hooks/hooksHelpers";
+import { cartSelector, totalPriceSelector } from "../../store/selectors";
 
 const Header = () => {
     const { pathname } = useLocation();
-    const { cart, totalPrice } = useAppSelector(productsSelector);
+    const cart = useAppSelector(cartSelector);
+    const totalPrice = useAppSelector(totalPriceSelector);
 
     return (
         <header className="header">

@@ -6,12 +6,14 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import Pagination from "../../components/Pagination/Pagination";
-import productsSelector from "../../store/selectors/productsSelector";
+import { processSelector } from "../../store/selectors";
 import { useAppSelector } from "../../hooks/hooksHelpers";
 import { IProduct } from "../../models/IProduct";
+import { selectAll } from "../../store/slices";
 
 const Home = () => {
-    const { process, items } = useAppSelector(productsSelector);
+    const items = useAppSelector(selectAll);
+    const process = useAppSelector(processSelector);
 
     const setContent = (process: string, items: Array<IProduct>) => {
         const fakeArr: number[] = [...Array(20).keys()];

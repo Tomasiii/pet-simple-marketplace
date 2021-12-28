@@ -46,7 +46,7 @@
         }
     },
     "lint-staged": {
-        "src/**/*.{js,jsx}": [
+        "src/**/*.{ts,tsx}": [
             "yarn lint && yarn format"
         ]
     },

@@ -1,32 +1,20 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import fetchProducts from "../thunks/getProducts";
+import { createSlice, createEntityAdapter, PayloadAction } from "@reduxjs/toolkit";
 import { IProduct } from "../../models/IProduct";
+import fetchProducts from "../thunks/getProducts";
 
-interface IProductsState {
-    items: Array<IProduct>;
-    cart: { [key: string]: Array<IProduct> };
-    process: "loading" | "waiting" | "idle" | "error";
-    totalPrice: number;
-    totalCount: number;
-    page: number;
-    perPage: number;
-    totalItems: number;
-}
-type FetchDataToState = Omit<
-    IProductsState,
-    "cart" | "process" | "totalPrice" | "totalCount"
->;
+const productsAdapter = createEntityAdapter<IProduct>();
 
-const initialState: IProductsState = {
-    items: [],
-    cart: {},
-    process: "loading",
+const initialState = productsAdapter.getInitialState({
+    cart: {} as { [key: string]: Array<IProduct> },
+    process: "loading" as "loading" | "waiting" | "idle" | "error",
     totalPrice: 0,
     totalCount: 0,
     page: 0,
     perPage: 0,
     totalItems: 0
-};
+});
+
+export type IProductsState = typeof initialState;
 
 const productsSlice = createSlice({
     name: "products",
@@ -82,21 +70,21 @@ const productsSlice = createSlice({
             .addCase(fetchProducts.pending, (state: IProductsState) => {
                 state.process = "waiting";
             })
-            .addCase(
-                fetchProducts.fulfilled,
-                (state: IProductsState, action: PayloadAction<FetchDataToState>) => {
-                    state.process = "idle";
-                    state.items = action.payload.items;
-                    state.page = action.payload.page;
-                    state.perPage = action.payload.perPage;
-                    state.totalItems = action.payload.totalItems;
-                }
-            )
+            .addCase(fetchProducts.fulfilled, (state: IProductsState, action) => {
+                state.process = "idle";
+                productsAdapter.setAll(state, action.payload.items);
+                productsAdapter.setOne(state, action.payload.page);
+                productsAdapter.setOne(state, action.payload.perPage);
+                productsAdapter.setOne(state, action.payload.totalItems);
+            })
             .addCase(fetchProducts.rejected, (state: IProductsState) => {
                 state.process = "error";
             });
     }
 });
+
+export const { selectIds, selectAll, selectTotal, selectById } =
+    productsAdapter.getSelectors(({ products }) => products);
 
 const { actions, reducer } = productsSlice;
 
