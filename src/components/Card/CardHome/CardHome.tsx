@@ -1,15 +1,16 @@
 import style from "./cardHome.module.scss";
 import { Link } from "react-router-dom";
-import { memo } from "react";
+import { FC, memo, useCallback } from "react";
 import ROUTE_PATHS from "../../../constants/routes";
-import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../../store/slices";
+import { IProduct } from "../../../models/IProduct";
+import { useAppDispatch } from "../../../hooks/hooksHelpers";
 
-const CardHome = (item) => {
+const CardHome: FC<IProduct> = (item) => {
     const { name, price, origin } = item;
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const addToCart = () => dispatch(addProductToCart(item));
+    const addToCart = useCallback(() => dispatch(addProductToCart(item)), [item]);
 
     return (
         <div className={style.card}>

@@ -1,23 +1,33 @@
 import style from "./cardCart.module.scss";
-import React, { memo } from "react";
+import React, { FC, memo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import ROUTE_PATHS from "../../../constants/routes";
-import { useDispatch } from "react-redux";
 import {
     addProductToCart,
     cleaningCartItem,
     removeProductFromCart
 } from "../../../store/slices";
+import { IProduct } from "../../../models/IProduct";
+import { useAppDispatch } from "../../../hooks/hooksHelpers";
 
-const CardCart = (props) => {
-    console.log(props);
-    const { item, curCardCount } = props;
+type Props = {
+    item: IProduct;
+    curCardCount: number;
+};
+
+const CardCart: FC<Props> = ({ item, curCardCount }) => {
     const { name, price, origin } = item;
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const addToCart = () => dispatch(addProductToCart(item));
-    const removeFromCart = () => dispatch(removeProductFromCart(item));
-    const removeItemGroup = () => dispatch(cleaningCartItem(item));
+    const addToCart = useCallback(() => dispatch(addProductToCart(item)), [item]);
+    const removeFromCart = useCallback(
+        () => dispatch(removeProductFromCart(item)),
+        [item]
+    );
+    const removeItemGroup = useCallback(
+        () => dispatch(cleaningCartItem(item)),
+        [item]
+    );
 
     return (
         <div className={style.card}>

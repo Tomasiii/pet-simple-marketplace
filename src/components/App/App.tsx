@@ -1,17 +1,17 @@
-import { memo, useEffect } from "react";
+import { FC, memo, useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
 import "./app.scss";
 import Header from "../Header/Header";
 import Spinner from "../Spinner/Spinner";
 import { routes } from "../../routes";
 import ROUTE_PATHS from "../../constants/routes";
-import { useDispatch, useSelector } from "react-redux";
 import fetchProducts from "../../store/thunks/getProducts";
 import productsSelector from "../../store/selectors/productsSelector";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 
-const App = () => {
-    const { process } = useSelector(productsSelector);
-    const dispatch = useDispatch();
+const App: FC = () => {
+    const { process } = useAppSelector(productsSelector);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(fetchProducts());

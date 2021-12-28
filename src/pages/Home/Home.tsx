@@ -6,14 +6,15 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import Pagination from "../../components/Pagination/Pagination";
-import { useSelector } from "react-redux";
 import productsSelector from "../../store/selectors/productsSelector";
+import { useAppSelector } from "../../hooks/hooksHelpers";
+import { IProduct } from "../../models/IProduct";
 
 const Home = () => {
-    const { process, items } = useSelector(productsSelector);
+    const { process, items } = useAppSelector(productsSelector);
 
-    const setContent = () => {
-        const fakeArr = [...Array(20).keys()];
+    const setContent = (process: string, items: Array<IProduct>) => {
+        const fakeArr: number[] = [...Array(20).keys()];
 
         switch (process) {
             case "waiting":
@@ -26,7 +27,6 @@ const Home = () => {
                         items={items}
                         ViewComponent={CardHome}
                     />
-                    // <div>working</div>
                 );
             case "error":
                 return <ErrorMessage />;

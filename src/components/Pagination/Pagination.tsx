@@ -1,20 +1,33 @@
-import { memo, useState } from "react";
+import { FC, memo, NamedExoticComponent, useMemo, useState } from "react";
 import style from "../../pages/Home/home.module.scss";
 import stl from "./paginator.module.scss";
+import { IProduct } from "../../models/IProduct";
 
-const Pagination = ({ items: { items }, ViewComponent, limitOnPage = 20 }) => {
+type Props = {
+    className: string;
+    items: Array<IProduct>;
+    ViewComponent: NamedExoticComponent<IProduct>;
+    limitOnPage?: number;
+};
+
+const Pagination: FC<Props> = ({ items, ViewComponent, limitOnPage = 20 }) => {
     const [curPage, setCurPage] = useState(1);
     const startItems = curPage * limitOnPage - limitOnPage;
-    const elementsForView = items.slice(startItems, startItems + limitOnPage);
+    const elementsForViewCount = items.slice(startItems, startItems + limitOnPage);
     const buttonsCount = Math.ceil(items.length / limitOnPage);
     const arrButtons = Array.from(Array(buttonsCount).keys());
+
+    const productsForView = useMemo(
+        () =>
+            elementsForViewCount.map((item) => (
+                <ViewComponent key={item.id} {...item} />
+            )),
+        elementsForViewCount
+    );
+
     return (
         <div>
-            <div className={style.home__wrapper}>
-                {elementsForView.map((item) => (
-                    <ViewComponent key={item.id} {...item} />
-                ))}
-            </div>
+            <div className={style.home__wrapper}>{productsForView}</div>
             <div className={stl.paginator__buttons}>
                 <button
                     disabled={curPage === 1}

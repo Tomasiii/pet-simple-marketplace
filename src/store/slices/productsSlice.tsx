@@ -1,28 +1,41 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import fetchProducts from "../thunks/getProducts";
+import { IProduct } from "../../models/IProduct";
 
-const initialState = {
+interface IProductsState {
+    items: Array<IProduct>;
+    cart: { [key: string]: Array<IProduct> };
+    process: "loading" | "waiting" | "idle" | "error";
+    totalPrice: number;
+    totalCount: number;
+    page: number;
+    perPage: number;
+    totalItems: number;
+}
+type FetchDataToState = Omit<
+    IProductsState,
+    "cart" | "process" | "totalPrice" | "totalCount"
+>;
+
+const initialState: IProductsState = {
     items: [],
     cart: {},
     process: "loading",
     totalPrice: 0,
-    totalCount: 0
+    totalCount: 0,
+    page: 0,
+    perPage: 0,
+    totalItems: 0
 };
 
 const productsSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
-        productsProcess: (state, action) => {
-            state.process = action.payload;
-        },
-        productsAddAll: (state, action) => {
-            state.items = action.payload.items;
-            state.page = action.payload.page;
-            state.perPage = action.payload.perPage;
-            state.totalItems = action.payload.totalItems;
-        },
-        addProductToCart: (state, action) => {
+        addProductToCart: (
+            state: IProductsState,
+            action: PayloadAction<IProduct>
+        ) => {
             const __payload = action.payload ?? null;
 
             state.cart[__payload.id]
@@ -32,7 +45,10 @@ const productsSlice = createSlice({
             state.totalCount += 1;
             state.totalPrice += __payload.price;
         },
-        removeProductFromCart: (state, action) => {
+        removeProductFromCart: (
+            state: IProductsState,
+            action: PayloadAction<IProduct>
+        ) => {
             const __payload = action.payload ?? null;
             if (state.cart[__payload.id].length === 1) {
                 delete state.cart[__payload.id];
@@ -42,14 +58,17 @@ const productsSlice = createSlice({
             state.totalCount -= 1;
             state.totalPrice -= __payload.price;
         },
-        cleaningCart: (state, action) => {
-            const __payload = action.payload ?? null;
+        cleaningCart: (state: IProductsState) => {
             state.cart = {};
             state.totalPrice = 0;
             state.totalCount = 0;
         },
-        cleaningCartItem: (state, action) => {
+        cleaningCartItem: (
+            state: IProductsState,
+            action: PayloadAction<IProduct>
+        ) => {
             const __payload = action.payload ?? null;
+
             state.totalPrice -= state.cart[__payload.id].reduce(
                 (sum, item) => sum + item.price,
                 0
@@ -60,17 +79,22 @@ const productsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchProducts.pending, (state) => {
+            .addCase(fetchProducts.pending, (state: IProductsState) => {
                 state.process = "waiting";
             })
-            .addCase(fetchProducts.fulfilled, (state, action) => {
-                state.process = "idle";
-                state.items = action.payload;
-            })
-            .addCase(fetchProducts.rejected, (state) => {
+            .addCase(
+                fetchProducts.fulfilled,
+                (state: IProductsState, action: PayloadAction<FetchDataToState>) => {
+                    state.process = "idle";
+                    state.items = action.payload.items;
+                    state.page = action.payload.page;
+                    state.perPage = action.payload.perPage;
+                    state.totalItems = action.payload.totalItems;
+                }
+            )
+            .addCase(fetchProducts.rejected, (state: IProductsState) => {
                 state.process = "error";
-            })
-            .addDefaultCase(() => {});
+            });
     }
 });
 
@@ -78,8 +102,6 @@ const { actions, reducer } = productsSlice;
 
 export default reducer;
 export const {
-    productsProcess,
-    productsAddAll,
     addProductToCart,
     removeProductFromCart,
     cleaningCart,

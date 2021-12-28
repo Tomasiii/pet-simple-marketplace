@@ -3,16 +3,14 @@ import style from "./product.module.scss";
 import { memo } from "react";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import ROUTE_PATHS from "../../constants/routes";
-import { useDispatch, useSelector } from "react-redux";
 import { addProductToCart } from "../../store/slices";
 import productsSelector from "../../store/selectors/productsSelector";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 
 const Product = () => {
-    const {
-        items: { items: productsItems }
-    } = useSelector(productsSelector);
-    const dispatch = useDispatch();
-    const { id } = useParams();
+    const { items: productsItems } = useAppSelector(productsSelector);
+    const dispatch = useAppDispatch();
+    const { id } = useParams<{ id: string }>();
 
     const [item] = productsItems.filter((item) => item.id === id);
     const addToCart = () => dispatch(addProductToCart(item));

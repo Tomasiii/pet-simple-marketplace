@@ -7,13 +7,14 @@ import CartBucketSvg from "../../assets/svg/CartBucketSvg";
 import CardCart from "../../components/Card/CardCart/CardCart";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import ROUTE_PATHS from "../../constants/routes";
-import { useDispatch, useSelector } from "react-redux";
 import { cleaningCart } from "../../store/slices";
 import productsSelector from "../../store/selectors/productsSelector";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 
 const Cart = () => {
-    const dispatch = useDispatch();
-    const { cart, totalCount, totalPrice } = useSelector(productsSelector);
+    const dispatch = useAppDispatch();
+    const { cart, totalCount, totalPrice } = useAppSelector(productsSelector);
+
     const onClearCart = () => {
         if (window.confirm("Вы действительно хотите очистить корзину?")) {
             dispatch(cleaningCart());

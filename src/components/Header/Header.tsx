@@ -5,12 +5,12 @@ import logoSvg from "../../assets/img/olx-logo.png";
 import CartSvg from "../../assets/svg/CartSvg";
 import wallet from "../../assets/img/wallet.png";
 import ROUTE_PATHS from "../../constants/routes";
-import { useSelector } from "react-redux";
 import productsSelector from "../../store/selectors/productsSelector";
+import { useAppSelector } from "../../hooks/hooksHelpers";
 
 const Header = () => {
-    let { pathname } = useLocation();
-    const { cart, totalPrice } = useSelector(productsSelector);
+    const { pathname } = useLocation();
+    const { cart, totalPrice } = useAppSelector(productsSelector);
 
     return (
         <header className="header">

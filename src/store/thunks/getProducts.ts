@@ -7,7 +7,7 @@ export const fetchProducts = createAsyncThunk("products/fetchProducts", async ()
         const { data } = await axiosInstance.get(URL.getProducts);
         return data;
     } catch (e) {
-        throw new Error("Something went wrong");
+        throw new Error("Something went wrong (request error)");
     }
 });
 export default fetchProducts;
