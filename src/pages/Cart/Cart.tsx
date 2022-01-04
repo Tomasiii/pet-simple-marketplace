@@ -37,11 +37,11 @@ const Cart = () => {
                             </div>
                         </div>
                         <div className="content__items">
-                            {Object.values(cart).map((item) => (
+                            {Object.values(cart.entities).map((item) => (
                                 <CardCart
-                                    key={item[0].id}
-                                    item={item[0]}
-                                    curCardCount={item.length}
+                                    key={item.id}
+                                    item={item}
+                                    curCardCount={item.count}
                                 />
                             ))}
                         </div>

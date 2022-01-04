@@ -5,7 +5,7 @@ import fetchProducts from "../thunks/getProducts";
 const productsAdapter = createEntityAdapter<IProduct>();
 
 const initialState = productsAdapter.getInitialState({
-    cart: {} as { [key: string]: Array<IProduct> },
+    cart: { ids: [], entities: {} } as EntityBase,
     process: "loading" as "loading" | "waiting" | "idle" | "error",
     totalPrice: 0,
     totalCount: 0,
@@ -24,30 +24,34 @@ const productsSlice = createSlice({
             state: IProductsState,
             action: PayloadAction<IProduct>
         ) => {
-            const __payload = action.payload ?? null;
-
-            state.cart[__payload.id]
-                ? state.cart[__payload.id].push(__payload)
-                : (state.cart[__payload.id] = [__payload]);
-
+            const _payload = action.payload;
+            productsAdapter.setOne(state.cart, {
+                ..._payload,
+                count: state.cart.entities[_payload.id]
+                    ? state.cart.entities[_payload.id].count + 1
+                    : 1
+            });
             state.totalCount += 1;
-            state.totalPrice += __payload.price;
+            state.totalPrice += _payload.price;
         },
         removeProductFromCart: (
             state: IProductsState,
             action: PayloadAction<IProduct>
         ) => {
-            const __payload = action.payload ?? null;
-            if (state.cart[__payload.id].length === 1) {
-                delete state.cart[__payload.id];
+            const _payload = action.payload;
+            if (_payload.count === 1) {
+                productsAdapter.removeOne(state.cart, _payload.id);
             } else {
-                state.cart[__payload.id].pop();
+                productsAdapter.setOne(state.cart, {
+                    ..._payload,
+                    count: _payload.count - 1
+                });
             }
             state.totalCount -= 1;
-            state.totalPrice -= __payload.price;
+            state.totalPrice -= _payload.price;
         },
         cleaningCart: (state: IProductsState) => {
-            state.cart = {};
+            productsAdapter.removeAll(state.cart);
             state.totalPrice = 0;
             state.totalCount = 0;
         },
@@ -55,14 +59,10 @@ const productsSlice = createSlice({
             state: IProductsState,
             action: PayloadAction<IProduct>
         ) => {
-            const __payload = action.payload ?? null;
-
-            state.totalPrice -= state.cart[__payload.id].reduce(
-                (sum, item) => sum + item.price,
-                0
-            );
-            state.totalCount -= state.cart[__payload.id].length;
-            delete state.cart[__payload.id];
+            const _payload = action.payload;
+            state.totalPrice -= _payload.count * _payload.price;
+            state.totalCount -= _payload.count;
+            productsAdapter.removeOne(state.cart, _payload.id);
         }
     },
     extraReducers: (builder) => {
@@ -95,3 +95,8 @@ export const {
     cleaningCart,
     cleaningCartItem
 } = actions;
+
+export interface EntityBase {
+    ids: Array<string>;
+    entities: { [key: string]: IProduct };
+}

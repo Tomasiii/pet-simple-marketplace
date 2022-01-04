@@ -1,7 +1,11 @@
 import React, { memo } from "react";
+import { useAppSelector } from "../../hooks/hooksHelpers";
+import { productsSelector } from "../../store/selectors";
 
-const CartSvg = ({ cart = {} }) => {
-    const isRed = Object.values(cart).length;
+const CartSvg = () => {
+    const { cart } = useAppSelector(productsSelector);
+
+    const isRed = cart.ids.length;
     const svgNotification = isRed ? "cart__svg__notification" : "";
     return (
         <div className="cart__rel">
@@ -35,7 +39,7 @@ const CartSvg = ({ cart = {} }) => {
                     strokeLinejoin="round"
                 />
             </svg>
-            <div className={svgNotification}></div>
+            <div className={svgNotification} />
         </div>
     );
 };

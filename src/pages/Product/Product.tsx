@@ -5,6 +5,7 @@ import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import ROUTE_PATHS from "../../constants/routes";
 import { addProductToCart, selectAll } from "../../store/slices";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
+import Error404 from "../../assets/img/Error404.png";
 
 const Product = () => {
     const productsItems = useAppSelector(selectAll);
@@ -12,7 +13,10 @@ const Product = () => {
     const dispatch = useAppDispatch();
     const { id } = useParams<{ id: string }>();
 
-    const [item] = productsItems.filter((item) => item.id === id);
+    const item = productsItems.find((item) => item.id === id);
+    if (!item) {
+        return <img src={Error404} alt="error 404" className={style.error404} />;
+    }
     const addToCart = () => dispatch(addProductToCart(item));
 
     return (

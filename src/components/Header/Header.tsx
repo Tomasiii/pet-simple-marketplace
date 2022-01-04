@@ -6,11 +6,10 @@ import CartSvg from "../../assets/svg/CartSvg";
 import wallet from "../../assets/img/wallet.png";
 import ROUTE_PATHS from "../../constants/routes";
 import { useAppSelector } from "../../hooks/hooksHelpers";
-import { cartSelector, totalPriceSelector } from "../../store/selectors";
+import { totalPriceSelector } from "../../store/selectors";
 
 const Header = () => {
     const { pathname } = useLocation();
-    const cart = useAppSelector(cartSelector);
     const totalPrice = useAppSelector(totalPriceSelector);
 
     return (
@@ -27,7 +26,7 @@ const Header = () => {
                         <Link to={ROUTE_PATHS.CART}>
                             <div className="header__cart">
                                 <h2 className="header__cart__item">
-                                    <CartSvg cart={cart} />
+                                    <CartSvg />
                                     Корзина
                                 </h2>
                                 <div className="header__cart__counter">
