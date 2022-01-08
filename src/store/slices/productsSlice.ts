@@ -1,6 +1,7 @@
 import { createSlice, createEntityAdapter, PayloadAction } from "@reduxjs/toolkit";
-import { IProduct } from "../../models/IProduct";
+import { IProduct } from "../../models/Product";
 import fetchProducts from "../thunks/getProducts";
+import { RootState } from "../index";
 
 const productsAdapter = createEntityAdapter<IProduct>();
 
@@ -8,10 +9,7 @@ const initialState = productsAdapter.getInitialState({
     cart: { ids: [], entities: {} } as EntityBase,
     process: "loading" as "loading" | "waiting" | "idle" | "error",
     totalPrice: 0,
-    totalCount: 0,
-    page: 0,
-    perPage: 0,
-    totalItems: 0
+    totalCount: 0
 });
 
 export type IProductsState = typeof initialState;
@@ -73,9 +71,6 @@ const productsSlice = createSlice({
             .addCase(fetchProducts.fulfilled, (state: IProductsState, action) => {
                 state.process = "idle";
                 productsAdapter.setAll(state, action.payload.items);
-                productsAdapter.setOne(state, action.payload.page);
-                productsAdapter.setOne(state, action.payload.perPage);
-                productsAdapter.setOne(state, action.payload.totalItems);
             })
             .addCase(fetchProducts.rejected, (state: IProductsState) => {
                 state.process = "error";
@@ -84,7 +79,7 @@ const productsSlice = createSlice({
 });
 
 export const { selectIds, selectAll, selectTotal, selectById } =
-    productsAdapter.getSelectors(({ products }) => products);
+    productsAdapter.getSelectors<RootState>(({ products }) => products);
 
 const { actions, reducer } = productsSlice;
 

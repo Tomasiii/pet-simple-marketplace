@@ -7,7 +7,7 @@ import {
     cleaningCartItem,
     removeProductFromCart
 } from "../../../store/slices";
-import { IProduct } from "../../../models/IProduct";
+import { IProduct } from "../../../models/Product";
 import { useAppDispatch } from "../../../hooks/hooksHelpers";
 
 type Props = {

@@ -1,37 +1,40 @@
-import { FC, memo, NamedExoticComponent, useMemo, useState } from "react";
+import { FC, memo } from "react";
 import style from "../../pages/Home/home.module.scss";
 import stl from "./paginator.module.scss";
-import { IProduct } from "../../models/IProduct";
+import { selectAll, setPageSort } from "../../store/slices";
+import {
+    pageSelector,
+    perPageSelector,
+    totalItemsSelector
+} from "../../store/selectors";
+import CardHome from "../Card/CardHome/CardHome";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 
-type Props = {
+interface IProps {
     className: string;
-    items: Array<IProduct>;
-    ViewComponent: NamedExoticComponent<IProduct>;
-    limitOnPage?: number;
-};
+}
 
-const Pagination: FC<Props> = ({ items, ViewComponent, limitOnPage = 20 }) => {
-    const [curPage, setCurPage] = useState(1);
-    const startItems = curPage * limitOnPage - limitOnPage;
-    const elementsForViewCount = items.slice(startItems, startItems + limitOnPage);
-    const buttonsCount = Math.ceil(items.length / limitOnPage);
+const Pagination: FC<IProps> = () => {
+    const dispatch = useAppDispatch();
+    const items = useAppSelector(selectAll);
+    const perPage = useAppSelector(perPageSelector);
+    const totalItems = useAppSelector(totalItemsSelector);
+    const page = useAppSelector(pageSelector);
+
+    const buttonsCount = Math.ceil(totalItems / perPage);
     const arrButtons = Array.from(Array(buttonsCount).keys());
-
-    const productsForView = useMemo(
-        () =>
-            elementsForViewCount.map((item) => (
-                <ViewComponent key={item.id} {...item} />
-            )),
-        elementsForViewCount
-    );
 
     return (
         <div>
-            <div className={style.home__wrapper}>{productsForView}</div>
+            <div className={style.home__wrapper}>
+                {items.map((item) => (
+                    <CardHome key={item.id} {...item} />
+                ))}
+            </div>
             <div className={stl.paginator__buttons}>
                 <button
-                    disabled={curPage === 1}
-                    onClick={() => setCurPage((prev) => prev - 1)}
+                    disabled={page === 1}
+                    onClick={() => dispatch(setPageSort(page - 1))}
                     className={stl.paginator__buttons__arrow}
                 >
                     <i className={`fas fa-arrow-circle-left fa-2x`} />
@@ -39,19 +42,19 @@ const Pagination: FC<Props> = ({ items, ViewComponent, limitOnPage = 20 }) => {
                 {arrButtons.map((button) => (
                     <div
                         className={
-                            curPage === button + 1
+                            page === button + 1
                                 ? stl.paginator__buttons__item__active
                                 : stl.paginator__buttons__item
                         }
-                        onClick={() => setCurPage(button + 1)}
+                        onClick={() => dispatch(setPageSort(button + 1))}
                         key={button}
                     >
                         {button + 1}
                     </div>
                 ))}
                 <button
-                    disabled={curPage === buttonsCount}
-                    onClick={() => setCurPage((prev) => prev + 1)}
+                    disabled={page === buttonsCount}
+                    onClick={() => dispatch(setPageSort(page + 1))}
                     className={stl.paginator__buttons__arrow}
                 >
                     <i className="fas fa-arrow-circle-right fa-2x" />

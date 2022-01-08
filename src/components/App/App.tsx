@@ -6,16 +6,17 @@ import Spinner from "../Spinner/Spinner";
 import { routes } from "../../routes";
 import ROUTE_PATHS from "../../constants/routes";
 import fetchProducts from "../../store/thunks/getProducts";
-import { processSelector } from "../../store/selectors/productsSelector";
+import { processSelector, sortSelector } from "../../store/selectors";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 
 const App: FC = () => {
     const process = useAppSelector(processSelector);
+    const sortObj = useAppSelector(sortSelector);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(fetchProducts());
-    }, [dispatch]);
+        dispatch(fetchProducts(sortObj));
+    }, [dispatch, sortObj]);
 
     if (process === "loading") return <Spinner />;
 

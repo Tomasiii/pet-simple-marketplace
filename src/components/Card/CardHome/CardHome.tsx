@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FC, memo, useCallback } from "react";
 import ROUTE_PATHS from "../../../constants/routes";
 import { addProductToCart } from "../../../store/slices";
-import { IProduct } from "../../../models/IProduct";
+import { IProduct } from "../../../models/Product";
 import { useAppDispatch } from "../../../hooks/hooksHelpers";
 
 const CardHome: FC<IProduct> = (item) => {
@@ -23,10 +23,7 @@ const CardHome: FC<IProduct> = (item) => {
                 <p className={style.card__title}>
                     {name}
                     <br />
-                    <span>
-                        Made in
-                        {origin}
-                    </span>
+                    <span>Made in {origin}</span>
                 </p>
             </Link>
             <div className={style.card__price}>
