@@ -1,0 +1,89 @@
+$base-blue: #82d1ff;
+
+.sort {
+    margin-left: 20px;
+    position: relative;
+    &__infinity{
+        display: inline;
+    }
+    &__label {
+        width:245px;
+        padding-right: 20px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        margin-bottom: 5px;
+        svg {
+            margin-right: 8px;
+            transform: rotate(0);
+
+            &.rotated {
+                transform: rotate(180deg);
+            }
+        }
+
+        b {
+            margin-right: 8px;
+        }
+
+        span {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 60px;
+            height: 25px;
+            color: $base-blue;
+            border-bottom: 1px dashed $base-blue;
+            font-size: 17px;
+        }
+    }
+
+    &__popup {
+        position: absolute;
+        z-index: 1;
+        right: 0;
+        margin-top: 5px;
+        background: #ffffff;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
+        border-radius: 10px;
+        overflow: hidden;
+        width: 180px;
+
+        ul {
+            list-style: none;
+            overflow: hidden;
+            margin: 10px 0 10px 0;
+            li {
+                list-style: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                width: 180px;
+                &.active,
+                &:hover {
+                    background: rgba(254, 95, 30, 0.05);
+                }
+                &.active {
+                    font-weight: bold;
+                    color: $base-blue;
+                }
+                input{
+                    width: 100%;
+                    margin-top: 3px;
+                }
+            }
+        }
+        &__button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            margin-bottom:10px;
+        }
+    }
+}
+.priceValues {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+}
