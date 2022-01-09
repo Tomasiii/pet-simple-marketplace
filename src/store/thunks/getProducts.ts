@@ -10,7 +10,6 @@ export const fetchProducts = createAsyncThunk(
             const { data } = await axiosInstance.get<FetchData>(
                 URL.getSortedProducts(sortObj)
             );
-            console.log(data);
             return data;
         } catch (e) {
             throw new Error("Something went wrong (request error)");
