@@ -22,7 +22,6 @@ const Home = () => {
                 return fakeArr.map((item) => <LoadingBlock key={item} />);
             case "idle":
                 return (
-                    // <Pagination className={style.home__wrapper} key={"Pagination"} />
                     <div className="App">
                         <PaginationBootstrap key={"Pagination"} />
                     </div>

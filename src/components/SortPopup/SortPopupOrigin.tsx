@@ -2,7 +2,9 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import style from "./sortPrice.module.scss";
 import { setOriginSort } from "../../store/slices/sortSlice";
-import { useAppDispatch } from "../../hooks/hooksHelpers";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
+import { originSelector, perPageSelector } from "../../store/selectors";
+import { memo } from "react";
 
 type IData = Array<{ [key: string]: string }>;
 
@@ -29,6 +31,8 @@ const animatedComponents = makeAnimated();
 
 const SortPopupOrigin = () => {
     const dispatch = useAppDispatch();
+    const origins = useAppSelector(originSelector);
+    const originsDefault = data.filter(({ value }) => origins.includes(value));
 
     const onSelectItem = (originsStruct: IData) => {
         const origins = originsStruct.map(({ value }) => value).join(",");
@@ -37,11 +41,12 @@ const SortPopupOrigin = () => {
 
     return (
         <div>
-            <b className={style.sort__label}>Sort by price:</b>
+            <b className={style.sort__label}>Sort by origin:</b>
             <Select
                 closeMenuOnSelect={false}
                 components={animatedComponents}
                 isMulti
+                defaultValue={originsDefault}
                 options={data}
                 onChange={(e) => onSelectItem(e as IData)}
             />
@@ -49,4 +54,4 @@ const SortPopupOrigin = () => {
     );
 };
 
-export default SortPopupOrigin;
+export default memo(SortPopupOrigin);
