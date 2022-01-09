@@ -1,9 +1,9 @@
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import style from "./sortPrice.module.scss";
-import { setOriginSort } from "../../store/slices/sortSlice";
+import { setOriginSort } from "../../store/slices";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
-import { originSelector, perPageSelector } from "../../store/selectors";
+import { originSelector } from "../../store/selectors";
 import { memo } from "react";
 
 type IData = Array<{ [key: string]: string }>;

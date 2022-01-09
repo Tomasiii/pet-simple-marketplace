@@ -14,15 +14,13 @@ const initialState = productsAdapter.getInitialState({
 });
 
 export type IProductsState = typeof initialState;
+type A<T> = PayloadAction<T>;
 
 const productsSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
-        addProductToCart: (
-            state: IProductsState,
-            action: PayloadAction<IProduct>
-        ) => {
+        addProductToCart: (state: IProductsState, action: A<IProduct>) => {
             const _payload = action.payload;
             productsAdapter.setOne(state.cart, {
                 ..._payload,
@@ -33,10 +31,7 @@ const productsSlice = createSlice({
             state.totalCount += 1;
             state.totalPrice += _payload.price;
         },
-        removeProductFromCart: (
-            state: IProductsState,
-            action: PayloadAction<IProduct>
-        ) => {
+        removeProductFromCart: (state: IProductsState, action: A<IProduct>) => {
             const _payload = action.payload;
             if (_payload.count === 1) {
                 productsAdapter.removeOne(state.cart, _payload.id);
@@ -54,10 +49,7 @@ const productsSlice = createSlice({
             state.totalPrice = 0;
             state.totalCount = 0;
         },
-        cleaningCartItem: (
-            state: IProductsState,
-            action: PayloadAction<IProduct>
-        ) => {
+        cleaningCartItem: (state: IProductsState, action: A<IProduct>) => {
             const _payload = action.payload;
             state.totalPrice -= _payload.count * _payload.price;
             state.totalCount -= _payload.count;
@@ -71,10 +63,7 @@ const productsSlice = createSlice({
             })
             .addCase(
                 fetchProducts.fulfilled,
-                (
-                    state: IProductsState,
-                    action: PayloadAction<Pick<FetchData, "items">>
-                ) => {
+                (state: IProductsState, action: A<Pick<FetchData, "items">>) => {
                     state.process = "idle";
                     productsAdapter.setAll(state, action.payload.items);
                 }
