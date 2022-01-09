@@ -2,6 +2,7 @@ import { createSlice, createEntityAdapter, PayloadAction } from "@reduxjs/toolki
 import { IProduct } from "../../models/Product";
 import fetchProducts from "../thunks/getProducts";
 import { RootState } from "../index";
+import { FetchData } from "../../models/Thunks";
 
 const productsAdapter = createEntityAdapter<IProduct>();
 
@@ -68,10 +69,16 @@ const productsSlice = createSlice({
             .addCase(fetchProducts.pending, (state: IProductsState) => {
                 state.process = "waiting";
             })
-            .addCase(fetchProducts.fulfilled, (state: IProductsState, action) => {
-                state.process = "idle";
-                productsAdapter.setAll(state, action.payload.items);
-            })
+            .addCase(
+                fetchProducts.fulfilled,
+                (
+                    state: IProductsState,
+                    action: PayloadAction<Pick<FetchData, "items">>
+                ) => {
+                    state.process = "idle";
+                    productsAdapter.setAll(state, action.payload.items);
+                }
+            )
             .addCase(fetchProducts.rejected, (state: IProductsState) => {
                 state.process = "error";
             });
