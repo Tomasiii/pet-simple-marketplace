@@ -30,7 +30,7 @@ $base-blue: #82d1ff;
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            width: 60px;
+            min-width: 60px;
             height: 25px;
             color: $base-blue;
             border-bottom: 1px dashed $base-blue;
