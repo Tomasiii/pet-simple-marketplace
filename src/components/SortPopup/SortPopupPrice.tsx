@@ -2,16 +2,20 @@ import { memo, useRef, useState } from "react";
 import TriangleSvg from "../../assets/svg/TriangleSvg";
 import { setMaxPriceSort, setMinPriceSort } from "../../store/slices";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
-import { useAppDispatch } from "../../hooks/hooksHelpers";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 import style from "./sortPrice.module.scss";
+import { minPriceSelector } from "../../store/selectors";
 
 const SortPopupPrice = () => {
+    const maxInitialState =
+        useAppSelector(minPriceSelector) === 0
+            ? "-"
+            : String(useAppSelector(minPriceSelector));
+    const [max, setMax] = useState(maxInitialState);
+    const [min, setMin] = useState(String(useAppSelector(minPriceSelector)));
     const [visiblePopup, setVisiblePopup] = useState(false);
-    const [min, setMin] = useState("0");
-    const [max, setMax] = useState("-");
     const sortRef = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
-
     const toggleVisiblePopup = () => {
         setVisiblePopup(!visiblePopup);
     };

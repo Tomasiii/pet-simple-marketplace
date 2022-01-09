@@ -23,7 +23,7 @@ const Pagination = () => {
     };
 
     if (Object.keys(items).length === 0)
-        return <p>There is no items according this price</p>;
+        return <h3>There is no items according this price</h3>;
 
     return (
         <div>

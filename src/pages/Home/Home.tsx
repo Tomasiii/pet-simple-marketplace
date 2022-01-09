@@ -4,12 +4,7 @@ import LoadingBlock from "../../components/Card/CardHome/LoadingBlock";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
-import Pagination from "../../components/Pagination/Pagination";
-import {
-    pageSelector,
-    processSelector,
-    totalItemsSelector
-} from "../../store/selectors";
+import { processSelector } from "../../store/selectors";
 import { useAppSelector } from "../../hooks/hooksHelpers";
 import SortPopupPerPage from "../../components/SortPopup/SortPopupPerPage";
 import SortPopupOrigin from "../../components/SortPopup/SortPopupOrigin";
