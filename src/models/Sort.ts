@@ -1,8 +1,8 @@
 export interface ISort {
-    origin: string;
+    origins: string;
     perPage: number;
     totalItems: number;
-    maxPrice: number;
+    maxPrice: number | null;
     minPrice: number;
     page: number;
 }

@@ -4,7 +4,7 @@ export const sortSelector = (state: RootState) => {
     return state.sort;
 };
 export const originSelector = (state: RootState) => {
-    return state.sort.origin;
+    return state.sort.origins;
 };
 export const maxPriceSelector = (state: RootState) => {
     return state.sort.maxPrice;

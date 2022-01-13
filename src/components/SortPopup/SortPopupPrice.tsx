@@ -8,7 +8,7 @@ import { maxPriceSelector, minPriceSelector } from "../../store/selectors";
 
 const SortPopupPrice = () => {
     const maxPrice = useAppSelector(maxPriceSelector);
-    const maxInitialState = maxPrice === 0 ? "-" : String(maxPrice);
+    const maxInitialState = maxPrice === null ? "-" : String(maxPrice);
     const minInitialState = String(useAppSelector(minPriceSelector));
 
     const [max, setMax] = useState(maxInitialState);
@@ -86,7 +86,7 @@ const SortPopupPrice = () => {
                             />
                         </li>
                     </ul>
-                    <div className={style.sort__popup__button}>
+                    <div className={style.sort__popup_button}>
                         <button onClick={onSelectItem}>Set</button>
                     </div>
                 </div>

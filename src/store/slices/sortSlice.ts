@@ -3,10 +3,10 @@ import { fetchProducts } from "../thunks/getProducts";
 import { ISort } from "../../models/Sort";
 
 const initialState: ISort = {
-    origin: "",
+    origins: "",
     perPage: 25,
     totalItems: 0,
-    maxPrice: 0,
+    maxPrice: null,
     minPrice: 0,
     page: 1
 };
@@ -17,7 +17,7 @@ const sortSlice = createSlice({
     initialState,
     reducers: {
         setOriginSort: (state: ISort, action: A<string>) => {
-            state.origin = action.payload;
+            state.origins = action.payload;
         },
         setPerPageSort: (state: ISort, action: A<number>) => {
             state.perPage = action.payload;
