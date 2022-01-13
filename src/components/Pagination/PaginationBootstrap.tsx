@@ -6,6 +6,7 @@ import {
     perPageSelector,
     totalItemsSelector
 } from "../../store/selectors";
+import pagination from "../../constants/pagination";
 import { selectAll, setPageSort } from "../../store/slices";
 import style from "../../pages/Home/home.module.scss";
 import CardHome from "../Card/CardHome/CardHome";
@@ -17,6 +18,7 @@ const Pagination = () => {
     );
     const current = useAppSelector(pageSelector);
     const items = useAppSelector(selectAll);
+    const { limitForHide } = pagination;
 
     const handlePagination = (current: number) => {
         dispatch(setPageSort(current));
@@ -24,7 +26,6 @@ const Pagination = () => {
 
     if (Object.keys(items).length === 0)
         return <h3>There is no items according this price</h3>;
-
     return (
         <div>
             <div className={style.home__wrapper}>
@@ -45,7 +46,7 @@ const Pagination = () => {
                             Previous
                         </a>
                     </li>
-                    {total < 7 ? (
+                    {total < limitForHide ? (
                         <>
                             {Array.apply(0, Array(total)).map((arr, i) => (
                                 <Fragment key={i}>
