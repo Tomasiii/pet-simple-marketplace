@@ -1,39 +1,29 @@
-import { FC, memo, useEffect } from "react";
+import { FC, memo } from "react";
 import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
 import "./app.scss";
 import Header from "../Header/Header";
-import Spinner from "../Spinner/Spinner";
 import { routes } from "../../routes";
 import ROUTE_PATHS from "../../constants/routes";
-import fetchProducts from "../../store/thunks/getProducts";
-import { processSelector, sortSelector } from "../../store/selectors";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
+import { Provider } from "react-redux";
+import { store } from "../../store";
 
 const App: FC = () => {
-    const process = useAppSelector(processSelector);
-    const sortObj = useAppSelector(sortSelector);
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(fetchProducts(sortObj));
-    }, [dispatch, sortObj]);
-
-    if (process === "loading") return <Spinner />;
-
     return (
-        <Router>
-            <div className="wrapper">
-                <Header />
-                <main>
-                    <div>
-                        <Switch>
-                            {routes}
-                            <Redirect to={ROUTE_PATHS.HOME} />
-                        </Switch>
-                    </div>
-                </main>
-            </div>
-        </Router>
+        <Provider store={store}>
+            <Router>
+                <div className="wrapper">
+                    <Header />
+                    <main>
+                        <div>
+                            <Switch>
+                                {routes}
+                                <Redirect to={ROUTE_PATHS.HOME} />
+                            </Switch>
+                        </div>
+                    </main>
+                </div>
+            </Router>
+        </Provider>
     );
 };
 
