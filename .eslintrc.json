@@ -1,36 +1,39 @@
 {
-    "root": true,
-    "parser": "@babel/eslint-parser",
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "plugins": ["react", "@typescript-eslint"],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "babelOptions": {
+            "presets": ["next/babel"]
         }
     },
-	"extends": [
-        "plugin:react/recommended",
-		"eslint:recommended",
-		"plugin:prettier/recommended"
-	],
-	"plugins": ["prettier"],
-	"rules": {
-        "prettier/prettier": "warn",
-        "react/jsx-uses-react": "off",
-        "react/react-in-jsx-scope": "off",
-        "no-unused-vars": "off",
+    "settings": {
+        "react": {
+            "version": "detect",
+            "pragma": "React"
+        }
+    },
+    "rules": {
         "react/prop-types": "off",
-        "no-case-declarations": "off"
-	},
-	"env": {
-        "browser": true,
-        "jest":  true,
-        "node": true
-	},
-	"settings": {
-		"react": {
-			"pragma": "React",
-			"version": "detect"
-		}
-	}
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "react/no-children-prop": "off",
+        "no-sparse-arrays": "off",
+        "react/jsx-uses-react": "off"
+    }
 }
