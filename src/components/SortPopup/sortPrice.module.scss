@@ -69,6 +69,9 @@ $base-blue: #82d1ff;
                 input{
                     width: 100%;
                     margin-top: 3px;
+                    padding: 3px;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
                 }
             }
         }

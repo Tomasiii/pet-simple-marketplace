@@ -9,14 +9,13 @@ import Error404 from "../../assets/img/Error404.png";
 
 const Product = () => {
     const productsItems = useAppSelector(selectAll);
-
     const dispatch = useAppDispatch();
     const { id } = useParams<{ id: string }>();
 
     const item = productsItems.find((item) => item.id === id);
-    if (!item) {
+    if (!item)
         return <img src={Error404} alt="error 404" className={style.error404} />;
-    }
+
     const addToCart = () => dispatch(addProductToCart(item));
 
     return (

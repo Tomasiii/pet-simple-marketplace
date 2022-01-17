@@ -1,16 +1,25 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
 import logoSvg from "../../assets/img/olx-logo.png";
 import CartSvg from "../../assets/svg/CartSvg";
-import wallet from "../../assets/img/wallet.png";
 import ROUTE_PATHS from "../../constants/routes";
-import { useAppSelector } from "../../hooks/hooksHelpers";
-import { totalPriceSelector } from "../../store/selectors";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
+import { sortSelector, totalPriceSelector } from "../../store/selectors";
+import Modal from "../Modal/Modal";
+import CreateProduct from "../Modal/childrens/CreateProduct/CreateProduct";
+import fetchProducts from "../../store/thunks/getProducts";
 
 const Header = () => {
-    const { pathname } = useLocation();
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const sortObj = useAppSelector(sortSelector);
     const totalPrice = useAppSelector(totalPriceSelector);
+    const dispatch = useAppDispatch();
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        dispatch(fetchProducts(sortObj));
+    }, [dispatch, sortObj]);
 
     return (
         <header className="header">
@@ -22,15 +31,22 @@ const Header = () => {
                         </div>
                     </Link>
 
+                    <button onClick={() => setIsOpenModal(true)}>
+                        create product
+                    </button>
+                    <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal}>
+                        <CreateProduct />
+                    </Modal>
+
+                    <Link to={ROUTE_PATHS.CREATED_PRODUCTS}>created products</Link>
+
                     {pathname !== ROUTE_PATHS.CART && (
                         <Link to={ROUTE_PATHS.CART}>
                             <div className="header__cart">
-                                <h2 className="header__cart__item">
-                                    <CartSvg />
-                                    Корзина
-                                </h2>
                                 <div className="header__cart__counter">
-                                    <img src={wallet} alt="1" />
+                                    <h2 className="header__cart__item">
+                                        <CartSvg />
+                                    </h2>
                                     <span className="header__black">
                                         {totalPrice}
                                     </span>

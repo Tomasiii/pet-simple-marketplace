@@ -1,0 +1,22 @@
+.home{
+    padding-top: 40px;
+    margin: 0 auto;
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 50px;
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    }
+    &__title{
+        margin: 0;
+        font-size: 35px;
+    }
+    &__wrapper{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 300px));
+        gap:35px;
+    }
+}

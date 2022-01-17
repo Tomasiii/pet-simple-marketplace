@@ -1,5 +1,5 @@
 import { memo, useEffect, useMemo } from "react";
-import style from "./home.module.scss";
+import style from "./createdProducts.module.scss";
 import LoadingBlock from "../../components/Card/CardHome/LoadingBlock";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
@@ -12,14 +12,17 @@ import SortPopupPrice from "../../components/SortPopup/SortPopupPrice";
 import PaginationBootstrap from "../../components/Pagination/PaginationBootstrap";
 import fetchProducts from "../../store/thunks/getProducts";
 
-const Home = () => {
+const CreatedProducts = () => {
     const process = useAppSelector(processSelector);
+    const sortObj = useAppSelector(sortSelector);
+    const dispatch = useAppDispatch();
 
     const content = useMemo(() => {
         const fakeArr = [...Array(20).keys()];
 
         switch (process) {
             case "loading":
+                console.log("loading");
                 return <Spinner />;
             case "waiting":
                 return fakeArr.map((item) => <LoadingBlock key={item} />);
@@ -36,6 +39,10 @@ const Home = () => {
         }
     }, [process]);
 
+    useEffect(() => {
+        dispatch(fetchProducts(sortObj));
+    }, [dispatch, sortObj]);
+
     return (
         <ErrorBoundary>
             <section className={style.home}>
@@ -51,4 +58,4 @@ const Home = () => {
     );
 };
 
-export default memo(Home);
+export default memo(CreatedProducts);
