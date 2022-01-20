@@ -11,7 +11,7 @@ import CreateProduct from "../Modal/childrens/CreateProduct/CreateProduct";
 import fetchProducts from "../../store/thunks/getProducts";
 
 const Header = () => {
-    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     const sortObj = useAppSelector(sortSelector);
     const totalPrice = useAppSelector(totalPriceSelector);
     const dispatch = useAppDispatch();
@@ -31,14 +31,23 @@ const Header = () => {
                         </div>
                     </Link>
 
-                    <button onClick={() => setIsOpenModal(true)}>
-                        create product
-                    </button>
-                    <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal}>
-                        <CreateProduct />
-                    </Modal>
+                    {pathname !== ROUTE_PATHS.CART && (
+                        <>
+                            <button
+                                onClick={() => setIsOpenModal(true)}
+                                className="header__nav-route"
+                            >
+                                Create product
+                            </button>
+                            <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal}>
+                                <CreateProduct />
+                            </Modal>
+                        </>
+                    )}
 
-                    <Link to={ROUTE_PATHS.CREATED_PRODUCTS}>created products</Link>
+                    <Link to={ROUTE_PATHS.CREATED_PRODUCTS}>
+                        <div className="header__nav-route">Created products</div>
+                    </Link>
 
                     {pathname !== ROUTE_PATHS.CART && (
                         <Link to={ROUTE_PATHS.CART}>
@@ -47,7 +56,7 @@ const Header = () => {
                                     <h2 className="header__cart__item">
                                         <CartSvg />
                                     </h2>
-                                    <span className="header__black">
+                                    <span className="header__nav-price">
                                         {totalPrice}
                                     </span>
                                 </div>

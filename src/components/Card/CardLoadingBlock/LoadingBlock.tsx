@@ -1,7 +1,7 @@
 import ContentLoader from "react-content-loader";
 import { FC } from "react";
 
-const LoadingBlock: FC = () => (
+const LoadingBlock: FC<{ className: string }> = () => (
     <ContentLoader
         speed={2}
         width={280}

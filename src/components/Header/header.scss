@@ -65,12 +65,22 @@
             }
         }
     }
-    &__black{
-        min-width: 60px;
-        background: #232323;
-        color:#fff;
-        border-radius: 45%;
-        padding: 5px 10px;
+    &__nav{
+        &-price{
+            background: #232323;
+            color:#fff;
+            min-width: 60px;
+            border-radius: 45%;
+            padding: 5px 10px;
+        }
+        &-route{
+            background: #232323;
+            color:#fff;
+            border: 0;
+            padding: 10px;
+            border-radius: 30px;
+            font-size: 16px;
+        }
     }
 }
 

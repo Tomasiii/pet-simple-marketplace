@@ -1,16 +1,17 @@
-import { memo, useEffect, useMemo } from "react";
+import { memo, useMemo } from "react";
 import style from "./home.module.scss";
-import LoadingBlock from "../../components/Card/CardHome/LoadingBlock";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import style2 from "../../components/Card/CardHome/cardHome.module.scss";
+import LoadingBlock from "../../components/Card/CardLoadingBlock/LoadingBlock";
+import ErrorMessage from "../../components/ErrorBoundary/ErrorMessage/ErrorMessage";
 import Spinner from "../../components/Spinner/Spinner";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
-import { processSelector, sortSelector } from "../../store/selectors";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
+import { processSelector } from "../../store/selectors";
+import { useAppSelector } from "../../hooks/hooksHelpers";
 import SortPopupPerPage from "../../components/SortPopup/SortPopupPerPage";
 import SortPopupOrigin from "../../components/SortPopup/SortPopupOrigin";
 import SortPopupPrice from "../../components/SortPopup/SortPopupPrice";
-import PaginationBootstrap from "../../components/Pagination/PaginationBootstrap";
-import fetchProducts from "../../store/thunks/getProducts";
+import Pagination from "../../components/Pagination/Pagination";
+import CardHome from "../../components/Card/CardHome/CardHome";
 
 const Home = () => {
     const process = useAppSelector(processSelector);
@@ -22,11 +23,17 @@ const Home = () => {
             case "loading":
                 return <Spinner />;
             case "waiting":
-                return fakeArr.map((item) => <LoadingBlock key={item} />);
+                return fakeArr.map((item) => (
+                    <LoadingBlock key={item} className={style2.card} />
+                ));
             case "idle":
                 return (
                     <div className="App">
-                        <PaginationBootstrap key={"Pagination"} />
+                        <Pagination
+                            key={"Pagination"}
+                            isEditable={null}
+                            Card={CardHome}
+                        />
                     </div>
                 );
             case "error":
@@ -40,7 +47,7 @@ const Home = () => {
         <ErrorBoundary>
             <section className={style.home}>
                 <div className={style.home__header} key="sortGroup">
-                    <h2 className={style.home__title}>Все товары</h2>
+                    <h2 className={style.home__title}>All products</h2>
                     <SortPopupPrice />
                     <SortPopupOrigin />
                     <SortPopupPerPage />

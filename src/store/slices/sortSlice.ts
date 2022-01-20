@@ -8,7 +8,8 @@ const initialState: ISort = {
     totalItems: 0,
     maxPrice: null,
     minPrice: 0,
-    page: 1
+    page: 1,
+    editable: null
 };
 
 type A<T> = PayloadAction<T>;
@@ -30,6 +31,9 @@ const sortSlice = createSlice({
         },
         setMinPriceSort: (state: ISort, action: A<number>) => {
             state.minPrice = action.payload;
+        },
+        setEditable: (state: ISort, action: A<boolean | null>) => {
+            state.editable = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -49,5 +53,6 @@ export const {
     setPerPageSort,
     setPageSort,
     setMaxPriceSort,
-    setMinPriceSort
+    setMinPriceSort,
+    setEditable
 } = actions;

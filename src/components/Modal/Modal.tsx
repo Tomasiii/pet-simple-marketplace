@@ -1,5 +1,6 @@
 import style from "./modal.module.scss";
-import { FC, memo, ReactElement, useEffect } from "react";
+import React, { FC, memo, ReactElement, useEffect, useState } from "react";
+import Confetti from "react-confetti";
 
 interface IProps {
     isOpen: boolean;
@@ -8,6 +9,8 @@ interface IProps {
 }
 
 const Modal: FC<IProps> = ({ isOpen, setIsOpen, children }) => {
+    const [isConfetti, setIsConfetti] = useState<boolean>(false);
+
     useEffect(() => {
         document.body.style.overflowY = isOpen ? "hidden" : "scroll";
         document.body.style.marginRight = isOpen ? "17px" : "0";
@@ -18,6 +21,9 @@ const Modal: FC<IProps> = ({ isOpen, setIsOpen, children }) => {
             className={isOpen ? style.modal + " " + style.active : style.modal}
             onClick={() => setIsOpen(false)}
         >
+            {isConfetti && (
+                <Confetti recycle={false} numberOfPieces={800} gravity={0.3} />
+            )}
             <div
                 className={
                     isOpen
@@ -26,7 +32,9 @@ const Modal: FC<IProps> = ({ isOpen, setIsOpen, children }) => {
                 }
                 onClick={(e) => e.stopPropagation()}
             >
-                {children}
+                {React.cloneElement(children, {
+                    setIsConfetti: setIsConfetti
+                })}
             </div>
         </div>
     );

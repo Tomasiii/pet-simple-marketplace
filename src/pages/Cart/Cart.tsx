@@ -10,6 +10,7 @@ import ROUTE_PATHS from "../../constants/routes";
 import { cleaningCart } from "../../store/slices";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 import { productsSelector } from "../../store/selectors";
+import { payProductsRequest } from "../../api/request";
 
 const Cart = () => {
     const dispatch = useAppDispatch();
@@ -61,7 +62,12 @@ const Cart = () => {
                                 >
                                     <span>Вернуться назад</span>
                                 </Link>
-                                <button className="pay-btn">
+                                <button
+                                    className="pay-btn"
+                                    onClick={async () =>
+                                        await payProductsRequest(cart, dispatch)
+                                    }
+                                >
                                     <span>Оплатить сейчас</span>
                                 </button>
                             </div>

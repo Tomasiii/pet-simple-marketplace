@@ -1,32 +1,60 @@
 import { Dispatch, SetStateAction, memo } from "react";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
-import style from "./createProduct.module.scss";
+import { AxiosError } from "axios";
+import { axiosInstance } from "../../../../api/axios";
+import { IProduct } from "../../../../models/Product";
+import { originOptions } from "../../../../constants/SortOptions";
+import style from "./editProduct.module.scss";
 import Select from "react-select";
-import { createProductRequest } from "../../../../api/request";
+import URL from "../../../../constants/url";
 
 interface IProps {
-    setIsConfetti?: Dispatch<SetStateAction<boolean>>;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
+    setCard: Dispatch<SetStateAction<IProduct>>;
+    defaultValuesProps: {
+        name: string;
+        origin?: { label: string; value: string };
+        price: number;
+        id: string;
+    };
 }
-
-export interface IFormInput {
+interface IFormInput {
     name: string;
-    price: string;
+    price: number;
     origin: { label: string; value: string };
 }
 
-const CreateProduct = ({ setIsConfetti }: IProps) => {
+const EditProduct = ({ defaultValuesProps, setIsOpen, setCard }: IProps) => {
     const {
         register,
         formState: { errors },
         handleSubmit,
-        reset,
-        control
+        control,
+        reset
     } = useForm<IFormInput>({
         mode: "onBlur"
     });
 
-    const onSubmit: SubmitHandler<IFormInput> = async (values) => {
-        await createProductRequest(values, reset, setIsConfetti);
+    const onSubmit: SubmitHandler<IFormInput> = async ({ name, origin, price }) => {
+        try {
+            const { data } = await axiosInstance.patch(
+                `${URL.getProducts}/${defaultValuesProps.id}`,
+                JSON.stringify({
+                    product: {
+                        name,
+                        price: +price,
+                        origin: origin?.value || defaultValuesProps.origin?.value
+                    }
+                })
+            );
+            setCard(data);
+            setIsOpen(false);
+        } catch (e) {
+            const errors = e as AxiosError;
+            alert(
+                `Error ${errors.response?.data.error.status} - ${errors.response?.data.error.message}`
+            );
+        }
     };
 
     return (
@@ -36,6 +64,7 @@ const CreateProduct = ({ setIsConfetti }: IProps) => {
                 <p className={style.label__text}>Name</p>
                 <input
                     className={style.input}
+                    defaultValue={defaultValuesProps.name}
                     {...register("name", {
                         required: "The field is required",
                         minLength: {
@@ -62,6 +91,7 @@ const CreateProduct = ({ setIsConfetti }: IProps) => {
                 <input
                     type="number"
                     className={style.input}
+                    defaultValue={defaultValuesProps.price}
                     {...register("price", {
                         required: "The field is required"
                     })}
@@ -77,39 +107,35 @@ const CreateProduct = ({ setIsConfetti }: IProps) => {
             <Controller
                 name="origin"
                 control={control}
-                rules={{ required: true, shouldUnregister: true }}
                 render={({ field }) => (
                     <Select
                         {...field}
-                        options={[
-                            {
-                                value: "africa",
-                                label: "Africa"
-                            },
-                            {
-                                value: "asia",
-                                label: "Asia"
-                            },
-                            {
-                                value: "europe",
-                                label: "Europe"
-                            },
-                            {
-                                value: "usa",
-                                label: "USA"
-                            }
-                        ]}
+                        options={originOptions}
                         className={style.origin}
+                        defaultValue={defaultValuesProps.origin}
                     />
                 )}
             />
-            <div className={style.errorMessage}>
-                {errors?.origin && <p>{"The field is required"}</p>}
-            </div>
 
-            <button className={style.button}>Save</button>
+            <div className={style.buttons}>
+                <button className={`${style.button} ${style.green}`}>Save</button>
+                <input
+                    type="button"
+                    className={style.button}
+                    value="Close"
+                    onClick={() => setIsOpen(false)}
+                />
+                <input
+                    type="button"
+                    className={`${style.button} ${style.red}`}
+                    value="Reset"
+                    onClick={() => {
+                        reset(defaultValuesProps);
+                    }}
+                />
+            </div>
         </form>
     );
 };
 
-export default memo(CreateProduct);
+export default memo(EditProduct);
