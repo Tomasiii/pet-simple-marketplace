@@ -10,12 +10,12 @@ import {
 import { IProduct } from "../../../models/Product";
 import { useAppDispatch } from "../../../hooks/hooksHelpers";
 
-type Props = {
+interface IProps {
     item: IProduct;
     curCardCount: number;
-};
+}
 
-const CardCart: FC<Props> = ({ item, curCardCount }) => {
+const CardCart: FC<IProps> = ({ item, curCardCount }) => {
     const { name, price, origin } = item;
     const dispatch = useAppDispatch();
 
@@ -35,7 +35,7 @@ const CardCart: FC<Props> = ({ item, curCardCount }) => {
                 <div className={style.card__product}>
                     <img
                         className={style.card__img}
-                        src="https://wheatskw.com/web/image/product.template/47/image_256"
+                        src="https://img.fozzyshop.com.ua/68845-large_default/napitok-coca-cola-banka.jpg"
                         alt="goods"
                     />
                     <p className={style.card__title}>

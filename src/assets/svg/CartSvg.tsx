@@ -1,16 +1,17 @@
 import React, { memo } from "react";
 import { useAppSelector } from "../../hooks/hooksHelpers";
 import { productsSelector } from "../../store/selectors";
+import style from "../../components/Header/header.module.scss";
 
 const CartSvg = () => {
     const { cart } = useAppSelector(productsSelector);
 
     const isRed = cart.ids.length;
-    const svgNotification = isRed ? "cart__svg__notification" : "";
+    const svgNotification = isRed ? style.cart__svg__notification : "";
     return (
-        <div className="cart__rel">
+        <div className={style.cart__rel}>
             <svg
-                className="cart__svg"
+                className={style.cart__svg}
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"

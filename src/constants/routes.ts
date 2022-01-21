@@ -3,7 +3,8 @@ const ROUTE_PATHS = {
     PRODUCTS: "/products/",
     PRODUCT_DETAILS: "/products/:id",
     CREATED_PRODUCTS: "/created-products",
-    CART: "/cart"
+    CART: "/cart",
+    PURCHASE_HISTORY: "/purchase-history"
 };
 
 export default ROUTE_PATHS;

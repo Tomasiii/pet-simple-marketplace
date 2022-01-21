@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import cartEmptyImage from "../../assets/img/empty-cart.png";
 import "./cart.scss";
 import CartSvg from "../../assets/svg/CartSvg";
@@ -14,6 +14,7 @@ import { payProductsRequest } from "../../api/request";
 
 const Cart = () => {
     const dispatch = useAppDispatch();
+    const urlHistory = useHistory();
     const { cart, totalCount, totalPrice } = useAppSelector(productsSelector);
 
     const onClearCart = () => {
@@ -65,7 +66,11 @@ const Cart = () => {
                                 <button
                                     className="pay-btn"
                                     onClick={async () =>
-                                        await payProductsRequest(cart, dispatch)
+                                        await payProductsRequest(
+                                            cart,
+                                            dispatch,
+                                            urlHistory
+                                        )
                                     }
                                 >
                                     <span>Оплатить сейчас</span>

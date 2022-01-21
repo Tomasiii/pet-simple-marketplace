@@ -19,7 +19,10 @@ const Modal: FC<IProps> = ({ isOpen, setIsOpen, children }) => {
     return (
         <div
             className={isOpen ? style.modal + " " + style.active : style.modal}
-            onClick={() => setIsOpen(false)}
+            onClick={() => {
+                setIsOpen(false);
+                console.log("click");
+            }}
         >
             {isConfetti && (
                 <Confetti recycle={false} numberOfPieces={800} gravity={0.3} />

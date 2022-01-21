@@ -1,10 +1,15 @@
-import { ReactElement } from "react";
+import { lazy, ReactElement } from "react";
 import { Route } from "react-router-dom";
-import Home from "../pages/Home/Home";
-import Cart from "../pages/Cart/Cart";
-import Product from "../pages/Product/Product";
+const Home = lazy(() => import("../pages/Home/Home"));
+const Cart = lazy(() => import("../pages/Cart/Cart"));
+const Product = lazy(() => import("../pages/Product/Product"));
+const CreatedProducts = lazy(
+    () => import("../pages/CreatedProducts/CreatedProducts")
+);
+const CartPurchaseHistory = lazy(
+    () => import("../pages/PurchaseHistory/PurchaseHistory")
+);
 import ROUTE_PATHS from "../constants/routes";
-import CreatedProducts from "../pages/CreatedProducts/CreatedProducts";
 
 const generalRoutes: ReactElement[] = [
     <Route
@@ -29,6 +34,12 @@ const generalRoutes: ReactElement[] = [
         path={ROUTE_PATHS.CREATED_PRODUCTS}
         key={ROUTE_PATHS.CREATED_PRODUCTS}
         render={() => <CreatedProducts />}
+        exact
+    />,
+    <Route
+        path={ROUTE_PATHS.PURCHASE_HISTORY}
+        key={ROUTE_PATHS.PURCHASE_HISTORY}
+        render={() => <CartPurchaseHistory />}
         exact
     />
 ];

@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import products from "./slices/productsSlice";
 import sort from "./slices/sortSlice";
+import history from "./slices/historySlice";
 
 export const store = configureStore({
-    reducer: { products, sort },
+    reducer: { products, sort, history },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== "production"
 });

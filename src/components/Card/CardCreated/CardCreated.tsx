@@ -17,7 +17,7 @@ const CardCreated: FC<IProduct> = (item) => {
                 <Link to={`${ROUTE_PATHS.PRODUCTS}${card.id}`}>
                     <img
                         className={style.card__img}
-                        src="https://wheatskw.com/web/image/product.template/47/image_256"
+                        src="https://img.fozzyshop.com.ua/68845-large_default/napitok-coca-cola-banka.jpg"
                         alt="goods"
                     />
                     <p className={style.card__title}>

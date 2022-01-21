@@ -3,9 +3,8 @@
         text-decoration: none;
         color: black;
     }
-
     display: grid;
-    grid-template-columns: 4fr 3fr 2fr 0.5fr;
+    grid-template-columns: 4fr 1fr;
     align-items: center;
     max-width: 100%;
 	margin: 20px auto;
@@ -32,16 +31,6 @@
 		}
 	}
 
-    &__count{
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        padding:0 25% 0 25%;
-        i{
-            cursor: pointer;
-        }
-    }
-
 	&__price{
 		color: #b6b6b6;
 		font-size: 18px;
@@ -52,20 +41,5 @@
 			line-height: 30px;
 		}
 	}
-    &__buy{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        &__button{
-            cursor:pointer;
-            padding: 5px;
-            border-radius: 10px;
-        }
-    }
-    &__delete{
-        i{
-            cursor: pointer;
-            font-size: 37px;
-        }
-    }
+
 }
