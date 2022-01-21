@@ -21,7 +21,3 @@ export const totalItemsSelector = (state: RootState) => {
 export const pageSelector = (state: RootState) => {
     return state.sort.page;
 };
-export const sortOmitTotalSelector = (state: RootState) => {
-    const { totalItems, ...rest } = state.sort;
-    return rest;
-};

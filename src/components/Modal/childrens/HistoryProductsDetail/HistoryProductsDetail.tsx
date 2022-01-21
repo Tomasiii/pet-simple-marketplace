@@ -1,8 +1,6 @@
 import React from "react";
 import { IHistoryBodyPieces } from "../../../../models/History";
 import style from "../../../Card/CardCart/cardCart.module.scss";
-import { Link } from "react-router-dom";
-import ROUTE_PATHS from "../../../../constants/routes";
 
 interface IProps {
     orderDetails: IHistoryBodyPieces;

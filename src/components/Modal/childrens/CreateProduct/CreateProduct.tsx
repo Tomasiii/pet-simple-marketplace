@@ -17,7 +17,7 @@ export interface IFormInput {
 const CreateProduct = ({ setIsConfetti }: IProps) => {
     const {
         register,
-        formState: { errors },
+        formState: { errors, isSubmitting },
         handleSubmit,
         reset,
         control
@@ -36,6 +36,7 @@ const CreateProduct = ({ setIsConfetti }: IProps) => {
                 <p className={style.label__text}>Name</p>
                 <input
                     className={style.input}
+                    disabled={isSubmitting}
                     {...register("name", {
                         required: "The field is required",
                         minLength: {
@@ -61,6 +62,7 @@ const CreateProduct = ({ setIsConfetti }: IProps) => {
                 <p className={style.label__text}>Price</p>
                 <input
                     type="number"
+                    disabled={isSubmitting}
                     className={style.input}
                     {...register("price", {
                         required: "The field is required"
@@ -81,6 +83,7 @@ const CreateProduct = ({ setIsConfetti }: IProps) => {
                 render={({ field }) => (
                     <Select
                         {...field}
+                        isDisabled={isSubmitting}
                         options={[
                             {
                                 value: "africa",
@@ -107,7 +110,9 @@ const CreateProduct = ({ setIsConfetti }: IProps) => {
                 {errors?.origin && <p>{"The field is required"}</p>}
             </div>
 
-            <button className={style.button}>Save</button>
+            <button className={style.button} disabled={isSubmitting}>
+                Save
+            </button>
         </form>
     );
 };

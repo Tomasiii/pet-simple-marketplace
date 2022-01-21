@@ -27,7 +27,7 @@ interface IFormInput {
 const EditProduct = ({ defaultValuesProps, setIsOpen, setCard }: IProps) => {
     const {
         register,
-        formState: { errors },
+        formState: { errors, isSubmitting },
         handleSubmit,
         control,
         reset
@@ -65,6 +65,7 @@ const EditProduct = ({ defaultValuesProps, setIsOpen, setCard }: IProps) => {
                 <input
                     className={style.input}
                     defaultValue={defaultValuesProps.name}
+                    disabled={isSubmitting}
                     {...register("name", {
                         required: "The field is required",
                         minLength: {
@@ -91,6 +92,7 @@ const EditProduct = ({ defaultValuesProps, setIsOpen, setCard }: IProps) => {
                 <input
                     type="number"
                     className={style.input}
+                    disabled={isSubmitting}
                     defaultValue={defaultValuesProps.price}
                     {...register("price", {
                         required: "The field is required"
@@ -110,6 +112,7 @@ const EditProduct = ({ defaultValuesProps, setIsOpen, setCard }: IProps) => {
                 render={({ field }) => (
                     <Select
                         {...field}
+                        isDisabled={isSubmitting}
                         options={originOptions}
                         className={style.origin}
                         defaultValue={defaultValuesProps.origin}
@@ -118,14 +121,21 @@ const EditProduct = ({ defaultValuesProps, setIsOpen, setCard }: IProps) => {
             />
 
             <div className={style.buttons}>
-                <button className={`${style.button} ${style.green}`}>Save</button>
+                <button
+                    className={`${style.button} ${style.green}`}
+                    disabled={isSubmitting}
+                >
+                    Save
+                </button>
                 <input
+                    disabled={isSubmitting}
                     type="button"
                     className={style.button}
                     value="Close"
                     onClick={() => setIsOpen(false)}
                 />
                 <input
+                    disabled={isSubmitting}
                     type="button"
                     className={`${style.button} ${style.red}`}
                     value="Reset"
