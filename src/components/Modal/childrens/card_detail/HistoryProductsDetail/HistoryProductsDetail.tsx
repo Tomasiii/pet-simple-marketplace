@@ -1,6 +1,6 @@
 import React from "react";
-import { IHistoryBodyPieces } from "../../../../models/History";
-import style from "../../../Card/CardCart/cardCart.module.scss";
+import { IHistoryBodyPieces } from "../../../../../models/History";
+import style from "../../../../Card/CardCart/cardCart.module.scss";
 
 interface IProps {
     orderDetails: IHistoryBodyPieces;

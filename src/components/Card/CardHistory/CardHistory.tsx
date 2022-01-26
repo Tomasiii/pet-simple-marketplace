@@ -2,7 +2,7 @@ import style from "./cardHistory.module.scss";
 import React, { FC, memo, useState } from "react";
 import { IHistoryBody } from "../../../models/History";
 import Modal from "../../Modal/Modal";
-import HistoryProductsDetail from "../../Modal/childrens/HistoryProductsDetail/HistoryProductsDetail";
+import HistoryProductsDetail from "../../Modal/childrens/card_detail/HistoryProductsDetail/HistoryProductsDetail";
 
 interface IProps {
     history: IHistoryBody;

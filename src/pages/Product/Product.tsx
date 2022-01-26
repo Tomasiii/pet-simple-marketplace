@@ -1,10 +1,11 @@
-import { Link, useParams } from "react-router-dom";
-import style from "./product.module.scss";
 import { memo } from "react";
-import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
-import ROUTE_PATHS from "../../constants/routes";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import { Link, useParams } from "react-router-dom";
 import { addProductToCart, selectAll } from "../../store/slices";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
+import style from "./product.module.scss";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
+import ROUTE_PATHS from "../../constants/routes";
 import Error404 from "../../assets/img/Error404.png";
 
 const Product = () => {
@@ -22,10 +23,22 @@ const Product = () => {
         <ErrorBoundary>
             <div className={style.product}>
                 <div className={style.product__promo}>
-                    <img
-                        src="https://wheatskw.com/web/image/product.template/47/image_256"
-                        alt="goods"
-                    />
+                    <TransformWrapper>
+                        {({ zoomIn, resetTransform }) => (
+                            <div
+                                onMouseOver={() => zoomIn()}
+                                onMouseLeave={() => resetTransform()}
+                            >
+                                <TransformComponent>
+                                    <img
+                                        src="https://img.fozzyshop.com.ua/68845-large_default/napitok-coca-cola-banka.jpg"
+                                        alt="goods"
+                                        width={400}
+                                    />
+                                </TransformComponent>
+                            </div>
+                        )}
+                    </TransformWrapper>
                     <p>{item?.name}</p>
                 </div>
 
