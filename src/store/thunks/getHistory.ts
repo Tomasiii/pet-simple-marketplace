@@ -8,7 +8,6 @@ export const fetchHistory = createAsyncThunk("history/fetchHistory", async () =>
         return data;
     } catch (e) {
         throw new Error("Something went wrong (request error)");
-        // Link to Home ....
     }
 });
 

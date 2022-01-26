@@ -21,7 +21,6 @@ const Modal: FC<IProps> = ({ isOpen, setIsOpen, children }) => {
             className={isOpen ? style.modal + " " + style.active : style.modal}
             onClick={() => {
                 setIsOpen(false);
-                console.log("click");
             }}
         >
             {isConfetti && (

@@ -4,7 +4,7 @@ import React, { FC, memo, useState } from "react";
 import ROUTE_PATHS from "../../../constants/routes";
 import { IProduct } from "../../../models/Product";
 import Modal from "../../Modal/Modal";
-import EditProduct from "../../Modal/childrens/EditProduct/EditProduct";
+import EditProduct from "../../Modal/childrens/name-price-origins/EditProduct/EditProduct";
 import { originOptions } from "../../../constants/SortOptions";
 
 const CardCreated: FC<IProduct> = (item) => {
@@ -48,12 +48,15 @@ const CardCreated: FC<IProduct> = (item) => {
                 <EditProduct
                     defaultValuesProps={{
                         name: card.name,
-                        price: card.price,
+                        price: card.price.toString(),
                         origin: originOptions.find(
                             (item) => item.value === card.origin
-                        ),
-                        id: card.id
+                        ) ?? {
+                            label: "",
+                            value: ""
+                        }
                     }}
+                    id={card.id}
                     setIsOpen={setIsOpenModal}
                     setCard={setCard}
                 />

@@ -1,21 +1,19 @@
 import React, { memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
-import { sortSelector, totalPriceSelector } from "../../store/selectors";
+import { omitTotalPriceSelector, totalPriceSelector } from "../../store/selectors";
 import style from "./header.module.scss";
 import LogoSvg from "../../assets/img/olx-logo.png";
 import Purchase from "../../assets/svg/purchase-order.svg";
 import CartSvg from "../../assets/svg/CartSvg";
 import ROUTE_PATHS from "../../constants/routes";
 import Modal from "../Modal/Modal";
-import CreateProduct from "../Modal/childrens/CreateProduct/CreateProduct";
+import CreateProduct from "../Modal/childrens/name-price-origins/CreateProduct/CreateProduct";
 import fetchProducts from "../../store/thunks/getProducts";
 
 const Header = () => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-    const sortObj = useAppSelector(sortSelector);
-    // const sortDep = useAppSelector(sortOmitTotalSelector);
-    // const { totalItems, ...sortDep } = sortObj;
+    const sortObj = useAppSelector(omitTotalPriceSelector);
     const totalPrice = useAppSelector(totalPriceSelector);
     const dispatch = useAppDispatch();
     const { pathname } = useLocation();
@@ -48,7 +46,7 @@ const Header = () => {
                                         isOpen={isOpenModal}
                                         setIsOpen={setIsOpenModal}
                                     >
-                                        <CreateProduct />
+                                        <CreateProduct setModal={setIsOpenModal} />
                                     </Modal>
 
                                     <Link to={ROUTE_PATHS.CREATED_PRODUCTS}>

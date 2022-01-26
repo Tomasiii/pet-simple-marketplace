@@ -6,7 +6,7 @@ import { FetchProductData } from "../../models/Thunks";
 
 export const fetchProducts = createAsyncThunk(
     "products/fetchProducts",
-    async (sortObj: ISort) => {
+    async (sortObj: Omit<ISort, "totalItems">) => {
         try {
             const { data } = await axiosInstance.get<FetchProductData>(
                 URL.getProducts,

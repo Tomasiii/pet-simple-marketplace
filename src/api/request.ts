@@ -4,26 +4,28 @@ import { cleaningCart } from "../store/slices";
 import { AxiosError } from "axios";
 import type { AppDispatch } from "../store";
 import { Dispatch, SetStateAction } from "react";
-import { IFormInput } from "../components/Modal/childrens/CreateProduct/CreateProduct";
 import { EntityBase } from "../models/Product";
 import { RouteComponentProps } from "react-router-dom";
+import { UseFormReset } from "react-hook-form/dist/types/form";
+import { IFormInput } from "../models/Form";
 
 export const createProductRequest = async (
     values: IFormInput,
-    reset: (values?: Record<string, any>, options?: Record<string, boolean>) => void,
+    reset: UseFormReset<IFormInput>,
+    setModal: Dispatch<SetStateAction<boolean>>,
     setIsConfetti?: Dispatch<SetStateAction<boolean>>
 ) => {
     const { name, price, origin } = values;
     try {
-        await axiosInstance.post(
-            URL.getProducts,
-            JSON.stringify({
-                product: { name, price: +price, origin: origin.value }
-            })
-        );
+        await axiosInstance.post(URL.getProducts, {
+            product: { name, price: +price, origin: origin.value ?? "" }
+        });
         if (setIsConfetti) {
             setIsConfetti(true);
-            setTimeout(() => setIsConfetti(false), 5000);
+            setTimeout(() => {
+                setIsConfetti(false);
+                setModal(false);
+            }, 1200);
         }
         reset({ name: "", price: "", origin: { value: "", label: "" } });
     } catch (e) {
@@ -48,7 +50,7 @@ export const payProductsRequest = async (
         }
     };
     try {
-        await axiosInstance.post(URL.getOrders, JSON.stringify(normalizeData));
+        await axiosInstance.post(URL.getOrders, normalizeData);
         dispatch(cleaningCart());
         urlHistory.push("/purchase-history");
     } catch (e) {
