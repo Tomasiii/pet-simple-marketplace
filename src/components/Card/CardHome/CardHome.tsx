@@ -38,7 +38,7 @@ const CardHome: FC<IProduct> = (item) => {
                             className={style.card__buy__button}
                             onClick={addToCart}
                         >
-                            Buy +
+                            Buy
                         </button>
                     </div>
                 </div>

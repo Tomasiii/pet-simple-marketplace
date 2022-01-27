@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
 import Select from "react-select";
-import { originOptions } from "../../../../constants/SortOptions";
+import { originsOptions } from "../../../../constants/SortOptions";
 import style from "./EditProduct/editProduct.module.scss";
 import { Control, UseFormRegister } from "react-hook-form/dist/types/form";
 import { FieldErrors } from "react-hook-form/dist/types/errors";
@@ -76,7 +76,7 @@ const NamePriceOriginsBase = ({
                     <Select
                         {...field}
                         isDisabled={isSubmitting}
-                        options={originOptions}
+                        options={originsOptions}
                         className={style.origin}
                         defaultValue={defaultValuesProps.origin}
                     />

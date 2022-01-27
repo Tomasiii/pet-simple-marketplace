@@ -7,12 +7,14 @@ import ROUTE_PATHS from "../../constants/routes";
 import { Provider } from "react-redux";
 import { store } from "../../store";
 import Spinner from "../Spinner/Spinner";
+import Request from "../Request/Request";
 
 const App: FC = () => {
     return (
         <Provider store={store}>
             <Router>
                 <div className="wrapper">
+                    <Request />
                     <Header />
                     <main>
                         <div>

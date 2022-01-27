@@ -5,7 +5,7 @@ import ROUTE_PATHS from "../../../constants/routes";
 import { IProduct } from "../../../models/Product";
 import Modal from "../../Modal/Modal";
 import EditProduct from "../../Modal/childrens/name-price-origins/EditProduct/EditProduct";
-import { originOptions } from "../../../constants/SortOptions";
+import { originsOptions } from "../../../constants/SortOptions";
 
 const CardCreated: FC<IProduct> = (item) => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -49,7 +49,7 @@ const CardCreated: FC<IProduct> = (item) => {
                     defaultValuesProps={{
                         name: card.name,
                         price: card.price.toString(),
-                        origin: originOptions.find(
+                        origin: originsOptions.find(
                             (item) => item.value === card.origin
                         ) ?? {
                             label: "",

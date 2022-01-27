@@ -1,8 +1,8 @@
+import React, { useEffect } from "react";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import { Link } from "react-router-dom";
 import cartEmptyImage from "../../assets/img/empty-cart.png";
 import ROUTE_PATHS from "../../constants/routes";
-import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 import fetchHistory from "../../store/thunks/getHistory";
 import { historySelector } from "../../store/selectors/historySelector";
