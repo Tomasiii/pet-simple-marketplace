@@ -17,6 +17,17 @@ const sortSlice = createSlice({
     name: "sort",
     initialState,
     reducers: {
+        setSort: (state: ISort, action: A<Partial<Omit<ISort, "totalItems">>>) => {
+            const p = action.payload;
+            if (p.perPage) state.perPage = p.perPage;
+            if (p.minPrice) state.minPrice = p.minPrice;
+            if (p.page) state.page = p.page;
+            if (p.origins !== undefined) state.origins = p.origins;
+            if (p.maxPrice !== undefined) state.maxPrice = p.maxPrice;
+            if (p.editable !== undefined) {
+                state.editable = p.editable === true ? true : null;
+            }
+        },
         setOriginSort: (state: ISort, action: A<string>) => {
             state.origins = action.payload;
         },
@@ -49,6 +60,7 @@ const { actions, reducer } = sortSlice;
 export default reducer;
 
 export const {
+    setSort,
     setOriginSort,
     setPerPageSort,
     setPageSort,

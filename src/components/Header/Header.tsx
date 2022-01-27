@@ -9,7 +9,6 @@ import CartSvg from "../../assets/svg/CartSvg";
 import ROUTE_PATHS from "../../constants/routes";
 import Modal from "../Modal/Modal";
 import CreateProduct from "../Modal/childrens/name-price-origins/CreateProduct/CreateProduct";
-// import Request from "../Request/Request";
 
 const Header = () => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -17,8 +16,6 @@ const Header = () => {
     const { pathname } = useLocation();
     return (
         <header className={style.header}>
-            {/*<Request />*/}
-
             <div>
                 <div className={style.header__wrapper}>
                     <Link to={ROUTE_PATHS.HOME}>

@@ -17,7 +17,7 @@ const SortPopupOrigin = () => {
 
     const dispatch = useAppDispatch();
     const origins = useAppSelector(originSelector);
-    const debounce = useDebounce(onSelectItem, 4000);
+    const debounce = useDebounce(onSelectItem, 500);
     const originsDefault = originsOptions.filter(({ value }) =>
         origins.includes(value)
     );
