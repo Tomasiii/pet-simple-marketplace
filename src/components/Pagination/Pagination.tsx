@@ -23,9 +23,10 @@ const Pagination = ({ isEditable, Card }: IProps) => {
     }, [dispatch, isEditable]);
 
     const total = Math.ceil(
-        useAppSelector(totalItemsSelector) / useAppSelector(perPageSelector)
+        (useAppSelector(totalItemsSelector) ?? 0) /
+            (useAppSelector(perPageSelector) ?? 1)
     );
-    const current = useAppSelector(pageSelector);
+    const current = useAppSelector(pageSelector) ?? 0;
     const items = useAppSelector(selectAll);
     const { limitForHide } = pagination;
 

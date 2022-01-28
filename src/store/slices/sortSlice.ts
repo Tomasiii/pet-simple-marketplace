@@ -4,11 +4,11 @@ import { ISort } from "../../models/Sort";
 
 const initialState: ISort = {
     origins: "",
-    perPage: 25,
-    totalItems: 0,
+    perPage: null,
+    totalItems: null,
     maxPrice: null,
     minPrice: 0,
-    page: 1,
+    page: null,
     editable: null
 };
 
