@@ -1,0 +1,107 @@
+.header{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eaeaea;
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    &__wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__logo{
+        img{
+            width:121px;
+            height:70px;
+        }
+    }
+    &__cart{
+        text-decoration: none;
+        text-align: center;
+        margin: 0 auto;
+        &__item{
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+            margin: 0;
+            padding-left: 10px;
+            color: #232323;
+            text-decoration: none;
+            .cart__rel{
+                position: relative;
+            }
+            .cart__svg {
+                position: relative;
+                right:5px;
+                top: 0;
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+                path {
+                    stroke: #232323;
+                    stroke-width: 1.9;
+                }
+                &__notification{
+                    position: absolute;
+                    animation: notification 0.7s ease-in-out 2;
+                    top:-2px;
+                    right: 8px;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background: #fe5f1e;
+                }
+            }
+        }
+        &__counter{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 18px;
+            margin-top:5px;
+            img{
+                height: 50px;
+            }
+        }
+    }
+    &__nav{
+        &_price{
+            background: #232323;
+            color:#fff;
+            min-width: 60px;
+            border-radius: 45%;
+            padding: 5px 10px;
+        }
+        &_route{
+            background: white;
+            color:#232323;
+            border: 1px solid #232323;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        &_route:hover{
+            background: #232323;
+            color:#fff;
+            border: 1px solid #232323;
+        }
+    }
+    .history{
+        height: 24px;
+        width: 24px;
+            &__label{
+                font-size: 20px;
+                font-weight: bold;
+                vertical-align: center;
+            }
+    }
+}
+
+@keyframes notification {
+    from { transform: scale(1)}
+    50%{transform: scale(1.5) }
+    to { transform: scale(1) }
+}
+

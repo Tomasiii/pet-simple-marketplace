@@ -1,8 +1,0 @@
-.App {
-    font-family: sans-serif;
-    text-align: center;
-}
-a.page-link.disabled {
-    pointer-events: none;
-    color: #ccc !important;
-}

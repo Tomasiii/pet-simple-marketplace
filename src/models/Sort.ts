@@ -5,4 +5,5 @@ export interface ISort {
     maxPrice: number | null;
     minPrice: number;
     page: number;
+    editable: boolean | null;
 }

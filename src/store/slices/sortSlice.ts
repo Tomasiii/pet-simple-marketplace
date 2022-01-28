@@ -8,7 +8,8 @@ const initialState: ISort = {
     totalItems: 0,
     maxPrice: null,
     minPrice: 0,
-    page: 1
+    page: 1,
+    editable: null
 };
 
 type A<T> = PayloadAction<T>;
@@ -16,6 +17,17 @@ const sortSlice = createSlice({
     name: "sort",
     initialState,
     reducers: {
+        setSort: (state: ISort, action: A<Partial<Omit<ISort, "totalItems">>>) => {
+            const p = action.payload;
+            if (p.perPage) state.perPage = p.perPage;
+            if (p.minPrice) state.minPrice = p.minPrice;
+            if (p.page) state.page = p.page;
+            if (p.origins !== undefined) state.origins = p.origins;
+            if (p.maxPrice !== undefined) state.maxPrice = p.maxPrice;
+            if (p.editable !== undefined) {
+                state.editable = p.editable === true ? true : null;
+            }
+        },
         setOriginSort: (state: ISort, action: A<string>) => {
             state.origins = action.payload;
         },
@@ -30,6 +42,9 @@ const sortSlice = createSlice({
         },
         setMinPriceSort: (state: ISort, action: A<number>) => {
             state.minPrice = action.payload;
+        },
+        setEditable: (state: ISort, action: A<boolean | null>) => {
+            state.editable = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -45,9 +60,11 @@ const { actions, reducer } = sortSlice;
 export default reducer;
 
 export const {
+    setSort,
     setOriginSort,
     setPerPageSort,
     setPageSort,
     setMaxPriceSort,
-    setMinPriceSort
+    setMinPriceSort,
+    setEditable
 } = actions;

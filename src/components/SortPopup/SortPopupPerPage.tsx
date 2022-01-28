@@ -4,21 +4,7 @@ import { setPerPageSort } from "../../store/slices";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 import { perPageSelector } from "../../store/selectors";
 import { memo } from "react";
-
-const perPageOptions = [
-    {
-        value: 10,
-        label: 10
-    },
-    {
-        value: 25,
-        label: 25
-    },
-    {
-        value: 50,
-        label: 50
-    }
-];
+import { perPageOptions } from "../../constants/SortOptions";
 
 const SortPopupPerPage = () => {
     const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
 import { ErrorInfo, PureComponent } from "react";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import ErrorMessage from "./ErrorMessage/ErrorMessage";
 
 class ErrorBoundary extends PureComponent {
     state = {

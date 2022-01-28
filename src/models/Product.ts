@@ -8,3 +8,8 @@ export interface IProduct {
     isEditable: boolean;
     count: number;
 }
+
+export interface EntityBase {
+    ids: Array<string>;
+    entities: { [key: string]: IProduct };
+}

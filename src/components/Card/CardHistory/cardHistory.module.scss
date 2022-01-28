@@ -1,0 +1,46 @@
+.card{
+    cursor: pointer;
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    align-items: center;
+    max-width: 100%;
+	margin: 20px auto;
+	padding: 10px 30px 10px 10px;
+	border: 1px solid #f3f3f3;
+	border-radius: 20px;
+    &__product{
+        display: flex;
+    }
+	&__img{
+		display: block;
+		width: 90px;
+		height: 90px;
+		object-fit: cover;
+	}
+	&__title{
+		margin: 10px 0 10px 0;
+		font-size: 17px;
+		line-height: 25px;
+		font-weight: 500;
+		span{
+			font-size: 16px;
+			font-weight: 400;
+		}
+	}
+
+	&__price{
+		color: #b6b6b6;
+		font-size: 18px;
+		span{
+			font-size: 19px;
+			font-weight: 700;
+			color: black;
+			line-height: 30px;
+		}
+	}
+
+}

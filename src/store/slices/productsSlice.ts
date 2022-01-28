@@ -1,8 +1,8 @@
 import { createSlice, createEntityAdapter, PayloadAction } from "@reduxjs/toolkit";
-import { IProduct } from "../../models/Product";
+import { EntityBase, IProduct } from "../../models/Product";
 import fetchProducts from "../thunks/getProducts";
 import { RootState } from "../index";
-import { FetchData } from "../../models/Thunks";
+import { FetchProductData } from "../../models/Thunks";
 
 const productsAdapter = createEntityAdapter<IProduct>();
 
@@ -63,7 +63,10 @@ const productsSlice = createSlice({
             })
             .addCase(
                 fetchProducts.fulfilled,
-                (state: IProductsState, action: A<Pick<FetchData, "items">>) => {
+                (
+                    state: IProductsState,
+                    action: A<Pick<FetchProductData, "items">>
+                ) => {
                     state.process = "idle";
                     productsAdapter.setAll(state, action.payload.items);
                 }
@@ -86,8 +89,3 @@ export const {
     cleaningCart,
     cleaningCartItem
 } = actions;
-
-export interface EntityBase {
-    ids: Array<string>;
-    entities: { [key: string]: IProduct };
-}
