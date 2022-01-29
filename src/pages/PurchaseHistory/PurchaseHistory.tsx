@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import cartEmptyImage from "../../assets/img/empty-cart.png";
 import ROUTE_PATHS from "../../constants/routes";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
-import fetchHistory from "../../store/thunks/getHistory";
+// import fetchHistory from "../../store/thunks/getHistory";
 import { historySelector } from "../../store/selectors/historySelector";
 import CardHistory from "../../components/Card/CardHistory/CardHistory";
 import "./purchaseHistory.scss";
@@ -14,7 +14,7 @@ const PurchaseHistory = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(fetchHistory());
+        dispatch({ type: "INIT" });
     }, [dispatch]);
 
     return (

@@ -1,25 +1,16 @@
-import fetchHistory from "../thunks/getHistory";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IHistory } from "../../models/History";
-import { FetchHistoryData } from "../../models/Thunks";
+import { createAction, createReducer, PayloadActionCreator } from "@reduxjs/toolkit";
+import { IHistory, IHistoryBodyArr } from "../../models/History";
 
 const initialState: IHistory = {
     history: null
 };
+export const setHistory: PayloadActionCreator<IHistoryBodyArr, "FETCH_HISTORY"> =
+    createAction("FETCH_HISTORY");
 
-const historySlice = createSlice({
-    name: "history",
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(
-            fetchHistory.fulfilled,
-            (state: IHistory, action: PayloadAction<FetchHistoryData>) => {
-                state.history = action.payload.items;
-            }
-        );
-    }
+const history = createReducer(initialState, (builder) => {
+    builder.addCase(setHistory, (state, action) => {
+        state.history = action.payload;
+    });
 });
 
-const { reducer } = historySlice;
-export default reducer;
+export default history;
