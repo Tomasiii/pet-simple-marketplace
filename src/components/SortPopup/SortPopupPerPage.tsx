@@ -3,8 +3,8 @@ import style from "./sortPrice.module.scss";
 import { setPerPageSort } from "../../store/slices";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 import { perPageSelector } from "../../store/selectors";
-import { memo } from "react";
 import { perPageOptions } from "../../constants/SortOptions";
+import { memo } from "react";
 
 const SortPopupPerPage = () => {
     const dispatch = useAppDispatch();

@@ -1,13 +1,13 @@
 import style from "./cardCreated.module.scss";
 import { Link } from "react-router-dom";
-import React, { FC, memo, useState } from "react";
+import React, { useState } from "react";
 import ROUTE_PATHS from "../../../constants/routes";
 import { IProduct } from "../../../models/Product";
 import Modal from "../../Modal/Modal";
 import EditProduct from "../../Modal/childrens/name-price-origins/EditProduct/EditProduct";
 import { originsOptions } from "../../../constants/SortOptions";
 
-const CardCreated: FC<IProduct> = (item) => {
+const CardCreated = (item: IProduct) => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     const [card, setCard] = useState<IProduct>(item);
 
@@ -65,4 +65,4 @@ const CardCreated: FC<IProduct> = (item) => {
     );
 };
 
-export default memo(CardCreated);
+export default CardCreated;

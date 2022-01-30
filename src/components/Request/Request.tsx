@@ -8,10 +8,10 @@ import { omitTotalPriceSelector } from "../../store/selectors";
 import { setSort } from "../../store/slices";
 
 const Request = () => {
+    const [isFirstRender, setIsFirstRender] = useState<boolean>(true); // без проверки происходит зацикликание запросов
     const sortObj = useAppSelector(omitTotalPriceSelector);
     const dispatch = useAppDispatch();
     const history = useHistory();
-    const [isFirstRender, setIsFirstRender] = useState<boolean>(true); // без проверки происходит зацикликание запросов
 
     useEffect(() => {
         const parsed = queryString.parse(history.location.search, {

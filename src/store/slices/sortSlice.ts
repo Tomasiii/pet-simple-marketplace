@@ -37,7 +37,7 @@ const sortSlice = createSlice({
         setPageSort: (state: ISort, action: A<number>) => {
             state.page = action.payload;
         },
-        setMaxPriceSort: (state: ISort, action: A<number>) => {
+        setMaxPriceSort: (state: ISort, action: A<number | null>) => {
             state.maxPrice = action.payload;
         },
         setMinPriceSort: (state: ISort, action: A<number>) => {

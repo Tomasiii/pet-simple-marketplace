@@ -1,12 +1,12 @@
 import style from "./cardHome.module.scss";
 import { Link } from "react-router-dom";
-import { FC, memo, useCallback } from "react";
+import { useCallback } from "react";
 import ROUTE_PATHS from "../../../constants/routes";
 import { addProductToCart } from "../../../store/slices";
 import { IProduct } from "../../../models/Product";
 import { useAppDispatch } from "../../../hooks/hooksHelpers";
 
-const CardHome: FC<IProduct> = (item) => {
+const CardHome = (item: IProduct) => {
     const { name, price, origin } = item;
     const dispatch = useAppDispatch();
 
@@ -47,4 +47,4 @@ const CardHome: FC<IProduct> = (item) => {
     );
 };
 
-export default memo(CardHome);
+export default CardHome;

@@ -13,6 +13,7 @@ const SortPopupPrice = () => {
 
     const [max, setMax] = useState(maxInitialState);
     const [min, setMin] = useState(minInitialState);
+
     const [visiblePopup, setVisiblePopup] = useState(false);
 
     const sortRef = useRef<HTMLDivElement>(null);
@@ -40,7 +41,7 @@ const SortPopupPrice = () => {
             setMin("0");
             return;
         }
-        dispatch(setMaxPriceSort(+max));
+        dispatch(setMaxPriceSort(max === "-" ? null : +max));
         dispatch(setMinPriceSort(+min));
         toggleVisiblePopup();
     };

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, memo, useEffect } from "react";
 import "./Pagination.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 import {
@@ -9,10 +9,11 @@ import {
 import pagination from "../../constants/pagination";
 import { selectAll, setEditable, setPageSort } from "../../store/slices";
 import style from "../../pages/Home/home.module.scss";
+import { IProduct } from "../../models/Product";
 
 interface IProps {
     isEditable: boolean | null;
-    Card: React.ComponentProps<any>;
+    Card: (props: IProduct) => JSX.Element;
 }
 
 const Pagination = ({ isEditable, Card }: IProps) => {
@@ -20,7 +21,7 @@ const Pagination = ({ isEditable, Card }: IProps) => {
 
     useEffect(() => {
         dispatch(setEditable(isEditable));
-    }, [dispatch, isEditable]);
+    }, [dispatch]);
 
     const total = Math.ceil(
         (useAppSelector(totalItemsSelector) ?? 0) /
@@ -36,6 +37,7 @@ const Pagination = ({ isEditable, Card }: IProps) => {
 
     if (Object.keys(items).length === 0)
         return <h3>There is no items according this price</h3>;
+
     return (
         <div>
             <div className={style.home__wrapper}>
@@ -259,4 +261,4 @@ const Pagination = ({ isEditable, Card }: IProps) => {
     );
 };
 
-export default Pagination;
+export default memo(Pagination);

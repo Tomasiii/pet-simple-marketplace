@@ -1,14 +1,10 @@
-import { lazy, ReactElement } from "react";
+import { ReactElement } from "react";
 import { Route } from "react-router-dom";
-const Home = lazy(() => import("../pages/Home/Home"));
-const Cart = lazy(() => import("../pages/Cart/Cart"));
-const Product = lazy(() => import("../pages/Product/Product"));
-const CreatedProducts = lazy(
-    () => import("../pages/CreatedProducts/CreatedProducts")
-);
-const CartPurchaseHistory = lazy(
-    () => import("../pages/PurchaseHistory/PurchaseHistory")
-);
+import Home from "../pages/Home/Home";
+import Cart from "../pages/Cart/Cart";
+import Product from "../pages/Product/Product";
+import CreatedProducts from "../pages/CreatedProducts/CreatedProducts";
+import PurchaseHistory from "../pages/PurchaseHistory/PurchaseHistory";
 import ROUTE_PATHS from "../constants/routes";
 
 const generalRoutes: ReactElement[] = [
@@ -39,7 +35,7 @@ const generalRoutes: ReactElement[] = [
     <Route
         path={ROUTE_PATHS.PURCHASE_HISTORY}
         key={ROUTE_PATHS.PURCHASE_HISTORY}
-        render={() => <CartPurchaseHistory />}
+        render={() => <PurchaseHistory />}
         exact
     />
 ];

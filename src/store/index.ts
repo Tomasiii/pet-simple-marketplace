@@ -3,7 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import RootSaga from "./saga";
 import products from "./slices/productsSlice";
 import sort from "./slices/sortSlice";
-import history from "./slices/historySlice";
+import history from "./saga/historyReducer";
 
 const sagaMiddleware = createSagaMiddleware();
 
