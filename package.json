@@ -42,7 +42,7 @@
         "webpack": "4.44.2"
     },
     "scripts": {
-        "start": "react-scripts --openssl-legacy-provider start",
+        "start": "react-scripts start",
         "build": "react-scripts --openssl-legacy-provider build",
         "prettier:check": "prettier --check \"./**/*.{ts,tsx}\"",
         "format": "prettier --write \"./**/*.{ts,tsx}\"",

@@ -1,4 +1,4 @@
-import { memo, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import TriangleSvg from "../../assets/svg/TriangleSvg";
 import { setMaxPriceSort, setMinPriceSort } from "../../store/slices";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
@@ -13,6 +13,11 @@ const SortPopupPrice = () => {
 
     const [max, setMax] = useState(maxInitialState);
     const [min, setMin] = useState(minInitialState);
+
+    useEffect(() => {
+        setMax(maxInitialState);
+        setMin(minInitialState);
+    }, [maxInitialState, minInitialState]);
 
     const [visiblePopup, setVisiblePopup] = useState(false);
 

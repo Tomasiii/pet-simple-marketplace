@@ -18,7 +18,7 @@ const SortPopupPerPage = () => {
         <div>
             <b className={style.sort__label}>Sort by perPage:</b>
             <Select
-                defaultValue={perPageDefault as { value: number; label: number }}
+                value={perPageDefault as { value: number; label: number }}
                 options={perPageOptions}
                 onChange={(e) => onSelectItem(e as { value: number; label: number })}
             />

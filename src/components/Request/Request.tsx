@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import * as queryString from "query-string";
-
 import fetchProducts from "../../store/thunks/getProducts";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 import { omitTotalPriceSelector } from "../../store/selectors";
