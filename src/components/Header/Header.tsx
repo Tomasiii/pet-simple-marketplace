@@ -14,6 +14,7 @@ const Header = () => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     const totalPrice = useAppSelector(totalPriceSelector);
     const { pathname } = useLocation();
+
     return (
         <header className={style.header}>
             <div>

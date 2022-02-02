@@ -2,6 +2,7 @@ import { IProduct } from "./Product";
 
 export interface IHistory {
     history: null | IHistoryBodyArr;
+    process: "loading" | "idle" | "error";
 }
 
 export type IHistoryBodyArr = Array<IHistoryBody>;

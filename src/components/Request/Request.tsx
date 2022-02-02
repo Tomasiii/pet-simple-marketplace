@@ -1,17 +1,16 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import * as queryString from "query-string";
-
 import fetchProducts from "../../store/thunks/getProducts";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooksHelpers";
 import { omitTotalPriceSelector } from "../../store/selectors";
 import { setSort } from "../../store/slices";
 
 const Request = () => {
+    const [isFirstRender, setIsFirstRender] = useState<boolean>(true); // без проверки происходит зацикликание запросов
     const sortObj = useAppSelector(omitTotalPriceSelector);
     const dispatch = useAppDispatch();
     const history = useHistory();
-    const [isFirstRender, setIsFirstRender] = useState<boolean>(true); // без проверки происходит зацикликание запросов
 
     useEffect(() => {
         const parsed = queryString.parse(history.location.search, {
