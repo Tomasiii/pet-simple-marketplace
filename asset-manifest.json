@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/yalantis-marketplace/static/css/main.1d11a556.chunk.css",
+    "main.css": "/yalantis-marketplace/static/css/main.a8e64341.chunk.css",
     "main.js": "/yalantis-marketplace/static/js/main.c8d255d3.chunk.js",
     "main.js.map": "/yalantis-marketplace/static/js/main.c8d255d3.chunk.js.map",
     "runtime-main.js": "/yalantis-marketplace/static/js/runtime-main.edefa149.js",
@@ -8,7 +8,7 @@
     "static/js/2.502f8856.chunk.js": "/yalantis-marketplace/static/js/2.502f8856.chunk.js",
     "static/js/2.502f8856.chunk.js.map": "/yalantis-marketplace/static/js/2.502f8856.chunk.js.map",
     "index.html": "/yalantis-marketplace/index.html",
-    "static/css/main.1d11a556.chunk.css.map": "/yalantis-marketplace/static/css/main.1d11a556.chunk.css.map",
+    "static/css/main.a8e64341.chunk.css.map": "/yalantis-marketplace/static/css/main.a8e64341.chunk.css.map",
     "static/js/2.502f8856.chunk.js.LICENSE.txt": "/yalantis-marketplace/static/js/2.502f8856.chunk.js.LICENSE.txt",
     "static/media/Error404.ff6269ec.png": "/yalantis-marketplace/static/media/Error404.ff6269ec.png",
     "static/media/empty-cart.db905d1f.png": "/yalantis-marketplace/static/media/empty-cart.db905d1f.png",
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.edefa149.js",
     "static/js/2.502f8856.chunk.js",
-    "static/css/main.1d11a556.chunk.css",
+    "static/css/main.a8e64341.chunk.css",
     "static/js/main.c8d255d3.chunk.js"
   ]
 }
